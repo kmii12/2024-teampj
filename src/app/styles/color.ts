@@ -1,4 +1,4 @@
-//カラー設定
+// tsx内でスタイルを設定するとき用
 export const color = {
   base: "#FFF4EA",
   main: "#FADFA1",
