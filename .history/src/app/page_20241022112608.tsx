@@ -6,7 +6,7 @@ export default function Home() {
       <h1>本を探す</h1>
 
       <div>
-        <BtnStyle href="result" text="検索"></BtnStyle>
+        <BtnStyle href="result/resultList" text="検索"></BtnStyle>
       </div>
     </>
   );

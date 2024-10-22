@@ -1,4 +1,4 @@
-import BtnStyle from "./components/btnStyle";
+import BtnStyle from "../components/BtnStyle";
 
 export default function Home() {
   return (
@@ -6,7 +6,7 @@ export default function Home() {
       <h1>本を探す</h1>
 
       <div>
-        <BtnStyle href="result" text="検索"></BtnStyle>
+        <BtnStyle></BtnStyle>
       </div>
     </>
   );
