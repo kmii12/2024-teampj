@@ -31,7 +31,6 @@
     //本の題名
     font-size: 2em;
     border-bottom: 1.5px solid $text;
-    width: fit-content;
   }
 
   .resultItem {
@@ -52,13 +51,11 @@
       height: 135px;
       border: 1px solid #000;
     }
-    .itemDescriptionWrap {
-      width: 180px;
-      .fixedBottom {
-        position: absolute;
-        bottom: 25px;
-        left: 170px;
-      }
+    .fixedBottom {
+      position: absolute;
+      bottom: 25px;
+      left: 165px;
+      right: -10px;
     }
   }
 }
