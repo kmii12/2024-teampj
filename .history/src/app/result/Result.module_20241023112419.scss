@@ -11,21 +11,6 @@
     text-align: center;
     font-size: 1.4em;
     margin-bottom: 30px;
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      width: 35%;
-      height: 1.5px;
-      background-color: #b9a6a6;
-    }
-    &::before {
-      left: 0;
-    }
-    &::after {
-      right: 0;
-    }
   }
   h3 {
     //本の題名
@@ -36,7 +21,7 @@
 
   .resultItem {
     //li
-    padding: 26px 14px;
+    padding: 14px;
     margin: 18px;
     width: 360px;
     height: 188px;
