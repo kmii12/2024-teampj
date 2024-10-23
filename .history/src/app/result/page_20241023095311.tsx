@@ -51,15 +51,13 @@ export default function Result() {
       <h1>本を探す</h1>
 
       <div className={styles.resultContainer}>
-        <h2>検索結果</h2>
-        <ul className={styles.resultList}>
-          <div className={styles.resultItemWrap}>
-            {ResultDatas.map((result) => (
-              <li key={result.id} className={styles.resultItem}>
-                <h3 className="title">題名　{result.title}</h3>
-              </li>
-            ))}
-          </div>
+        <h2 style={styles.resultTitle}>検索結果</h2>
+        <ul style={styles.resultList}>
+          {ResultDatas.map((result) => (
+            <li key={result.id} style={styles.resultListItem}>
+              <h3 style={styles.title}>{result.title}</h3>
+            </li>
+          ))}
         </ul>
       </div>
     </>

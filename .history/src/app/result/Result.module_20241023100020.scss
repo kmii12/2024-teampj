@@ -1,0 +1,11 @@
+@import "../styles/variables.scss";
+
+.resultContainer {
+  margin: 44px 0; //resultPage全ての上下の余白
+  // border: 1px solid #000;
+
+  h2.resultTitle {
+    display: block;
+    text-align: center;
+  }
+}

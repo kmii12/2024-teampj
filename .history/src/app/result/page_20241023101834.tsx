@@ -5,7 +5,7 @@ import styles from "./Result.module.scss";
 import { usePathname } from "next/navigation";
 
 export default function Result() {
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   //ダミーデータ（あとからfirebaseから取得）
   const ResultDatas = [
@@ -53,7 +53,7 @@ export default function Result() {
       <div className={styles.resultContainer}>
         <h2>検索結果</h2>
         <ul className={styles.resultList}>
-          <div className={styles.resultItemWrap}>
+          <div className={styles.resultItemRap}>
             {ResultDatas.map((result) => (
               <li key={result.id} className={styles.resultItem}>
                 <h3 className="title">題名　{result.title}</h3>

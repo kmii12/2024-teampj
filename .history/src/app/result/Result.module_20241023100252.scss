@@ -1,0 +1,12 @@
+@import "../styles/variables.scss";
+
+.resultContainer {
+  margin: 44px 0; //resultPage全ての上下の余白
+  // border: 1px solid #000;
+
+  .resultTitle {
+    position: relative;
+
+    font-size: 1.5em;
+  }
+}
