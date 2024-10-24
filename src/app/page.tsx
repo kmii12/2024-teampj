@@ -1,7 +1,10 @@
+import Header from "./components/Header";
+
 export default function Home() {
   return (
     <>
-      <h1>本を探す</h1>
+      <Header />
+      <input type="search" id="bookSearch" name="search" />
     </>
   );
 }
