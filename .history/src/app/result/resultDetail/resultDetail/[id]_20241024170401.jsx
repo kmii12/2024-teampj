@@ -1,11 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import styles from "./Result.module.scss";
-// import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+// import firebase from "../../firebase/firebaseConfig"; // Firebaseの設定をインポート
 
-export default function Result() {
-  // const pathname = usePathname();
+const ResultDetail = () => {
+  const router = useRouter();
+  const { id } = router.query; // URLから動的なIDを取得
+
+  const [resultDetails, setResultDetails] = useState(null); //本のデータを保存するstate
 
   //ダミーデータ（あとからfirebaseから取得）
   const ResultDatas = [
@@ -90,39 +93,25 @@ export default function Result() {
       season: "不明",
     },
   ];
-  return (
-    <>
-      <h1>本を探す</h1>
 
-      <div className={styles.resultContainer}>
-        <h2>検索結果({ResultDatas.length}件)</h2>
-        <ul className={styles.resultList}>
-          <div className={styles.resultItemWrap}>
-            {ResultDatas.map((result) => (
-              <li key={result.id} className={styles.resultItem}>
-                <Link href={`/result/resultDetail/${result.id}`}>
-                  <div className={styles.resultItemWrap}>
-                    <div className={styles.itemImageWrap}>
-                      <img
-                        src={result.image}
-                        alt={result.title}
-                        className={styles.image}
-                      />
-                    </div>
-                    <div className={styles.itemDescriptionWrap}>
-                      <h3 className="title">題名　{result.title}</h3>
-                      <div className={styles.fixedBottom}>
-                        <p className="writer">作者　{result.writer}</p>
-                        <p className="illustrator">絵　{result.illustrator}</p>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </div>
-        </ul>
-      </div>
-    </>
+  // const details = ResultDatas.find((item) => item.ud == id);
+
+  useEffect(() => {
+    // idがまだundefinedの状態では処理しないようにする
+    if (id) {
+      const foundDetail = ResultDatas.find((item) => item.id == id); // idでデータを検索
+      setResultDetails(foundDetail);
+    }
+  }, [id]);
+
+  if (!resultDetails) {
+    return <p>Loading...</p>;
+  }
+
+  return (
+    <div>
+      <h1>{details.title}</h1>
+    </div>
   );
-}
+};
+export default ResultDetail;

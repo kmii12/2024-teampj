@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import styles from "./Result.module.scss";
-// import { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Result() {
-  // const pathname = usePathname();
+  const pathname = usePathname();
 
   //ダミーデータ（あとからfirebaseから取得）
   const ResultDatas = [
@@ -100,21 +100,19 @@ export default function Result() {
           <div className={styles.resultItemWrap}>
             {ResultDatas.map((result) => (
               <li key={result.id} className={styles.resultItem}>
-                <Link href={`/result/resultDetail/${result.id}`}>
-                  <div className={styles.resultItemWrap}>
-                    <div className={styles.itemImageWrap}>
-                      <img
-                        src={result.image}
-                        alt={result.title}
-                        className={styles.image}
-                      />
-                    </div>
-                    <div className={styles.itemDescriptionWrap}>
-                      <h3 className="title">題名　{result.title}</h3>
-                      <div className={styles.fixedBottom}>
-                        <p className="writer">作者　{result.writer}</p>
-                        <p className="illustrator">絵　{result.illustrator}</p>
-                      </div>
+                <Link href={`/resultDetail/${result.id}`}>
+                  <div className={styles.itemImageWrap}>
+                    <img
+                      src={result.image}
+                      alt={result.title}
+                      className={styles.image}
+                    />
+                  </div>
+                  <div className={styles.itemDescriptionWrap}>
+                    <h3 className="title">題名　{result.title}</h3>
+                    <div className={styles.fixedBottom}>
+                      <p className="writer">作者　{result.writer}</p>
+                      <p className="illustrator">絵　{result.illustrator}</p>
                     </div>
                   </div>
                 </Link>

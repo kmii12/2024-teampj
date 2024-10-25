@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import styles from "./Result.module.scss";
-// import { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Result() {
-  // const pathname = usePathname();
+  const pathname = usePathname();
 
   //ダミーデータ（あとからfirebaseから取得）
   const ResultDatas = [
@@ -103,7 +103,7 @@ export default function Result() {
                 <Link href={`/result/resultDetail/${result.id}`}>
                   <div className={styles.resultItemWrap}>
                     <div className={styles.itemImageWrap}>
-                      <img
+                      <Image
                         src={result.image}
                         alt={result.title}
                         className={styles.image}

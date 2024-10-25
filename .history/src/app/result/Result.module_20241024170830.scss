@@ -2,7 +2,7 @@
 
 .resultContainer {
   color: $text;
-  margin: 44px 0 120px 0; //resultPage全ての上下の余白
+  margin: 44px 0; //resultPage全ての上下の余白
   // border: 1px solid #000;
 
   h2 {
@@ -37,7 +37,7 @@
   .resultItem {
     //li
     padding: 26px 14px;
-    margin: 18px;
+    margin: 18px 0 80px 0;
     width: 360px;
     height: 188px;
     background-color: $main_pale;
