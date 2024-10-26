@@ -1,22 +1,24 @@
-import { color } from "../styles/color";
+// import { color } from "../styles/color";
 
 export default function Header() {
   return (
     <header style={header}>
-      <div style={titleWrap}>
-        <h1 style={title}>本を探す</h1>
-      </div>
+      <h1 style={title}>ロゴ</h1>
     </header>
   );
 }
 
 const header = {
-  backgroundColor: color.base,
+  paddingTop: "5dvh",
+  paddingBottom: "6dvh",
+  textAlign: "center" as const,
 };
-
-const titleWrap = {};
 
 const title = {
   fontSize: "1.6rem",
-  color: color.text,
+  // display: "inline-block",
+  // backgroundColor: color.white,
+  // border: `4px solid ${color.main}`,
+  // borderRadius: "10px",
+  // color: color.text,
 };
