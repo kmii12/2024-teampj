@@ -5,4 +5,6 @@ export const color = {
   sub: "#C96868",
   accent: "#7EACB5",
   text: "#755D52",
+  main_pale: "#fbe8bb",
+  white: "#fdfdfd",
 };
