@@ -1,0 +1,66 @@
+@import "../../../styles/variables.scss";
+
+.detailTtlWrap {
+  padding: 26px 14px;
+  margin: 18px;
+  width: 360px;
+  height: 188px;
+  position: relative;
+  //Flexで画像と説明を横並びにするためのWrap
+  display: flex;
+  gap: 18px;
+  .itemImageWrap {
+    width: 170px;
+    height: 162px;
+    display: flex;
+    // align-items: center;
+    // justify-content: center;
+
+    .image {
+      width: 100%;
+      height: auto;
+
+      object-fit: cover;
+    }
+  }
+
+  .itemDescriptionWrap {
+    width: 180px;
+    h1 {
+      border-bottom: 1.5px solid $text;
+      width: fit-content;
+    }
+    .fixedBottom {
+      position: absolute;
+      bottom: 0px;
+      left: 190px;
+      p {
+        font-size: 1.4rem;
+        margin: 10px 0;
+      }
+    }
+  }
+}
+
+.descriptionContainer {
+  margin: 35px 20px;
+
+  .summary {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
+  .summaryTxt {
+    font-size: 1.3rem;
+    line-height: 25px;
+  }
+}
+
+.storageBtn {
+  width: 104px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: $sub;
+  font-size: 1.7rem;
+  color: #fff;
+  line-height: 20px;
+}

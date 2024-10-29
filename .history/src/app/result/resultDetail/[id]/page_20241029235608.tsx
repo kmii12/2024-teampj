@@ -160,10 +160,8 @@ const ResultDetail: React.FC = () => {
         </div>
       </div>
 
-      <div className={detailStyles.btnWrap}>
-        <button type="button" className={detailStyles.storageBtn}>
-          保存
-        </button>
+      <div>
+        <button type="button">保存</button>
       </div>
     </>
   );

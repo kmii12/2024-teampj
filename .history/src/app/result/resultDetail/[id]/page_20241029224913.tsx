@@ -2,8 +2,6 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import detailStyles from "./ResultDetail.module.scss";
-import styles from "../../Result.module.scss";
 
 interface ResultData {
   id: number;
@@ -33,7 +31,7 @@ const ResultDetail: React.FC = () => {
       title: "桃太郎",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/momotaro.jpeg",
+      image: "",
       livingThing: ["人間", "陸の生き物", "空の生き物"],
       mainCharacter: "桃太郎",
       character: [
@@ -48,7 +46,7 @@ const ResultDetail: React.FC = () => {
       genre: "昔話",
       location: "日本",
       hue: "不明",
-      atmosphere: "",
+      atmosphere: [],
       season: "不明",
     },
     {
@@ -56,7 +54,7 @@ const ResultDetail: React.FC = () => {
       title: "赤ずきん",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/littleRedRidingHood.jpeg",
+      image: "",
       livingThing: ["人間", "陸の生き物", "空の生き物"],
       mainCharacter: "赤ずきん",
       character: ["赤ずきん", "おばあさん", "オオカミ"],
@@ -71,14 +69,14 @@ const ResultDetail: React.FC = () => {
       title: "シンデレラ",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/cinderella.jpeg",
-      livingThing: "人間",
+      image: "",
+      livingThing: ["人間"],
       mainCharacter: "シンデレラ",
       character: ["シンデレラ", "王子", "魔法使い"],
       genre: "昔話",
       location: "海外",
       hue: "不明",
-      atmosphere: "",
+      atmosphere: [],
       season: "不明",
     },
     {
@@ -86,14 +84,14 @@ const ResultDetail: React.FC = () => {
       title: "白雪姫",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/snowWhite.jpeg",
+      image: "",
       livingThing: ["人間", "陸の生き物"],
       mainCharacter: "白雪姫",
       character: ["白雪姫", "王子", "魔女", "小人"],
       genre: "昔話",
       location: "海外",
       hue: "不明",
-      atmosphere: "",
+      atmosphere: [],
       season: "不明",
     },
     {
@@ -101,14 +99,14 @@ const ResultDetail: React.FC = () => {
       title: "アラジンと魔法のランプ",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/aladdin.jpeg",
+      image: "",
       livingThing: ["人間", "陸の生き物"],
       mainCharacter: "アラジン",
       character: ["アラジン", "ジーニー", "王女", "魔法使い", "盗賊"],
       genre: "昔話",
       location: "海外",
       hue: "不明",
-      atmosphere: "",
+      atmosphere: [],
       season: "不明",
     },
   ];
@@ -127,45 +125,23 @@ const ResultDetail: React.FC = () => {
   }
 
   return (
-    <>
-      <div className={styles.resultContainer}>
-        <div className={detailStyles.detailTtlWrap}>
-          <div className={detailStyles.itemImageWrap}>
-            <img
-              src={resultDetails.image}
-              alt={resultDetails.title}
-              className={detailStyles.image}
-            />
-          </div>
-          <div className={detailStyles.itemDescriptionWrap}>
-            <h1 className="title">題名　{resultDetails.title}</h1>
-            <div className={detailStyles.fixedBottom}>
-              <p className="writer">作者　{resultDetails.writer}</p>
-              <p className="illustrator">絵　{resultDetails.illustrator}</p>
-              <p className="">出版社　{resultDetails.illustrator}</p>
-            </div>
+    <div>
+      <div className={styles.resultItemWrap}>
+        <div className={styles.itemImageWrap}>
+          <img src={result.image} alt={result.title} className={styles.image} />
+        </div>
+        <div className={styles.itemDescriptionWrap}>
+          <h3 className="title">題名　{result.title}</h3>
+          <div className={styles.fixedBottom}>
+            <p className="writer">作者　{result.writer}</p>
+            <p className="illustrator">絵　{result.illustrator}</p>
           </div>
         </div>
-
-        <div className={detailStyles.descriptionContainer}>
-          <h2 className={detailStyles.summary}>あらすじ</h2>
-          <p className={detailStyles.summaryTxt}>
-            むかしむかし、ある国に、シンデレラという
-            女の子がいました。やさしいお父さんが亡くなり、
-            シンデレラは、いじわるなまま母とふたりの姉に
-            こき使われる毎日を過ごしていました。
-            そんなある日、妖精のおばあさんがあらわれ、
-            シンデレラはあこがれの舞踏会へ行くことになり……
-          </p>
-        </div>
       </div>
-
-      <div className={detailStyles.btnWrap}>
-        <button type="button" className={detailStyles.storageBtn}>
-          保存
-        </button>
-      </div>
-    </>
+      <h1>{resultDetails.title}</h1>
+      <p>作者: {resultDetails.writer}</p>
+      <p>絵: {resultDetails.illustrator}</p>
+    </div>
   );
 };
 

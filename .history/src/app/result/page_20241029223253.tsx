@@ -3,7 +3,6 @@
 import Link from "next/link";
 import styles from "./Result.module.scss";
 // import { usePathname } from "next/navigation";
-import SearchBar from "@/app/components/SearchBar";
 
 export default function Result() {
   // const pathname = usePathname();
@@ -15,7 +14,7 @@ export default function Result() {
       title: "桃太郎",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/momotaro.jpeg",
+      image: "//public/img/momotaro.jpeg",
       livingThing: ["人間", "陸の生き物", "空の生き物"],
       mainCharacter: "桃太郎",
       character: [
@@ -38,7 +37,7 @@ export default function Result() {
       title: "赤ずきん",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/littleRedRidingHood.jpeg",
+      image: "/public/img/littleRedRidingHood.jpeg",
       livingThing: ["人間", "陸の生き物", "空の生き物"],
       mainCharacter: "赤ずきん",
       character: ["赤ずきん", "おばあさん", "オオカミ"],
@@ -53,7 +52,7 @@ export default function Result() {
       title: "シンデレラ",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/cinderella.jpeg",
+      image: "/public/img/cinderella.jpeg",
       livingThing: "人間",
       mainCharacter: "シンデレラ",
       character: ["シンデレラ", "王子", "魔法使い"],
@@ -68,7 +67,7 @@ export default function Result() {
       title: "白雪姫",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/snowWhite.jpeg",
+      image: "/public/img/snowWhite.jpeg",
       livingThing: ["人間", "陸の生き物"],
       mainCharacter: "白雪姫",
       character: ["白雪姫", "王子", "魔女", "小人"],
@@ -83,7 +82,7 @@ export default function Result() {
       title: "アラジンと魔法のランプ",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/aladdin.jpeg",
+      image: "/public/img/aladdin.jpeg",
       livingThing: ["人間", "陸の生き物"],
       mainCharacter: "アラジン",
       character: ["アラジン", "ジーニー", "王女", "魔法使い", "盗賊"],
@@ -97,10 +96,9 @@ export default function Result() {
   return (
     <>
       <h1>本を探す</h1>
-      <SearchBar />
 
       <div className={styles.resultContainer}>
-        <h2 className={styles.resultTitle}>検索結果({ResultDatas.length}件)</h2>
+        <h2>検索結果({ResultDatas.length}件)</h2>
         <ul className={styles.resultList}>
           <div className={styles.resultItemWrap}>
             {ResultDatas.map((result) => (

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import styles from "./Result.module.scss";
 // import { usePathname } from "next/navigation";
-import SearchBar from "@/app/components/SearchBar";
+import SearchBar from "@・・/app/components/SearchBar";
 
 export default function Result() {
   // const pathname = usePathname();

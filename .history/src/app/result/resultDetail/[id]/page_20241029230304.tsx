@@ -1,21 +1,39 @@
 "use client";
 
-import Link from "next/link";
-import styles from "./Result.module.scss";
-// import { usePathname } from "next/navigation";
-import SearchBar from "@/app/components/SearchBar";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import detailStyles from "./ResultDetail.module.scss";
+import styles from "result/Result.module.scss";
 
-export default function Result() {
-  // const pathname = usePathname();
+interface ResultData {
+  id: number;
+  title: string;
+  writer: string;
+  illustrator: string;
+  image: string;
+  livingThing: string[];
+  mainCharacter: string;
+  character: string[];
+  genre: string;
+  location: string;
+  hue: string;
+  atmosphere: string[];
+  season: string;
+}
 
-  //ダミーデータ（あとからfirebaseから取得）
-  const ResultDatas = [
+const ResultDetail: React.FC = () => {
+  const { id } = useParams(); // URLから動的なIDを取得
+
+  const [resultDetails, setResultDetails] = useState<ResultData | null>(null); // 本のデータを保存するstate
+
+  // ダミーデータ（あとからfirebaseから取得）
+  const ResultDatas: ResultData[] = [
     {
       id: 1,
       title: "桃太郎",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/momotaro.jpeg",
+      image: "",
       livingThing: ["人間", "陸の生き物", "空の生き物"],
       mainCharacter: "桃太郎",
       character: [
@@ -30,7 +48,7 @@ export default function Result() {
       genre: "昔話",
       location: "日本",
       hue: "不明",
-      atmosphere: "",
+      atmosphere: [],
       season: "不明",
     },
     {
@@ -38,7 +56,7 @@ export default function Result() {
       title: "赤ずきん",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/littleRedRidingHood.jpeg",
+      image: "",
       livingThing: ["人間", "陸の生き物", "空の生き物"],
       mainCharacter: "赤ずきん",
       character: ["赤ずきん", "おばあさん", "オオカミ"],
@@ -53,14 +71,14 @@ export default function Result() {
       title: "シンデレラ",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/cinderella.jpeg",
-      livingThing: "人間",
+      image: "",
+      livingThing: ["人間"],
       mainCharacter: "シンデレラ",
       character: ["シンデレラ", "王子", "魔法使い"],
       genre: "昔話",
       location: "海外",
       hue: "不明",
-      atmosphere: "",
+      atmosphere: [],
       season: "不明",
     },
     {
@@ -68,14 +86,14 @@ export default function Result() {
       title: "白雪姫",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/snowWhite.jpeg",
+      image: "",
       livingThing: ["人間", "陸の生き物"],
       mainCharacter: "白雪姫",
       character: ["白雪姫", "王子", "魔女", "小人"],
       genre: "昔話",
       location: "海外",
       hue: "不明",
-      atmosphere: "",
+      atmosphere: [],
       season: "不明",
     },
     {
@@ -83,51 +101,42 @@ export default function Result() {
       title: "アラジンと魔法のランプ",
       writer: "不明",
       illustrator: "不明",
-      image: "/img/aladdin.jpeg",
+      image: "",
       livingThing: ["人間", "陸の生き物"],
       mainCharacter: "アラジン",
       character: ["アラジン", "ジーニー", "王女", "魔法使い", "盗賊"],
       genre: "昔話",
       location: "海外",
       hue: "不明",
-      atmosphere: "",
+      atmosphere: [],
       season: "不明",
     },
   ];
+
+  useEffect(() => {
+    // idがまだundefinedの状態では処理しないようにする
+    if (id) {
+      const numericId = parseInt(id, 10); // idを数値に変換
+      const foundDetail = ResultDatas.find((item) => item.id === numericId); // idでデータを検索
+      setResultDetails(foundDetail || null); // 見つからなかった場合はnullを設定
+    }
+  }, [id]);
+
+  if (!resultDetails) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
-      <h1>本を探す</h1>
-      <SearchBar />
-
-      <div className={styles.resultContainer}>
-        <h2 className={styles.resultTitle}>検索結果({ResultDatas.length}件)</h2>
-        <ul className={styles.resultList}>
-          <div className={styles.resultItemWrap}>
-            {ResultDatas.map((result) => (
-              <li key={result.id} className={styles.resultItem}>
-                <Link href={`/result/resultDetail/${result.id}`}>
-                  <div className={styles.resultItemWrap}>
-                    <div className={styles.itemImageWrap}>
-                      <img
-                        src={result.image}
-                        alt={result.title}
-                        className={styles.image}
-                      />
-                    </div>
-                    <div className={styles.itemDescriptionWrap}>
-                      <h3 className="title">題名　{result.title}</h3>
-                      <div className={styles.fixedBottom}>
-                        <p className="writer">作者　{result.writer}</p>
-                        <p className="illustrator">絵　{result.illustrator}</p>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </div>
-        </ul>
+      <div className={detailStyles.detailContainer}>
+        <div className={styles.detailTtlWrap}>
+          <h1>{resultDetails.title}</h1>
+          <p>作者: {resultDetails.writer}</p>
+          <p>絵: {resultDetails.illustrator}</p>
+        </div>
       </div>
     </>
   );
-}
+};
+
+export default ResultDetail;

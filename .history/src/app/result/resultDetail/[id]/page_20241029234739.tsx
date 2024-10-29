@@ -159,12 +159,6 @@ const ResultDetail: React.FC = () => {
           </p>
         </div>
       </div>
-
-      <div className={detailStyles.btnWrap}>
-        <button type="button" className={detailStyles.storageBtn}>
-          保存
-        </button>
-      </div>
     </>
   );
 };

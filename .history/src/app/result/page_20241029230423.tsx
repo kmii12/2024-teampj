@@ -3,7 +3,6 @@
 import Link from "next/link";
 import styles from "./Result.module.scss";
 // import { usePathname } from "next/navigation";
-import SearchBar from "@/app/components/SearchBar";
 
 export default function Result() {
   // const pathname = usePathname();
@@ -97,10 +96,9 @@ export default function Result() {
   return (
     <>
       <h1>本を探す</h1>
-      <SearchBar />
 
       <div className={styles.resultContainer}>
-        <h2 className={styles.resultTitle}>検索結果({ResultDatas.length}件)</h2>
+        <h2>検索結果({ResultDatas.length}件)</h2>
         <ul className={styles.resultList}>
           <div className={styles.resultItemWrap}>
             {ResultDatas.map((result) => (
