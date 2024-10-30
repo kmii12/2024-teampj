@@ -138,7 +138,10 @@ const ResultDetail: React.FC = () => {
             />
           </div>
           <div className={detailStyles.itemDescriptionWrap}>
-            <h1 className="title">題名　{resultDetails.title}</h1>
+            <h1 className="title">
+              <span className={detailStyles.smallLabel}>題名</span>　
+              {resultDetails.title}
+            </h1>
             <div className={detailStyles.fixedBottom}>
               <p className="writer">作者　{resultDetails.writer}</p>
               <p className="illustrator">絵　{resultDetails.illustrator}</p>
@@ -158,12 +161,12 @@ const ResultDetail: React.FC = () => {
             シンデレラはあこがれの舞踏会へ行くことになり……
           </p>
         </div>
-      </div>
 
-      <div className={detailStyles.btnWrap}>
-        <button type="button" className={detailStyles.storageBtn}>
-          保存
-        </button>
+        <div className={detailStyles.btnWrap}>
+          <button type="button" className={detailStyles.storageBtn}>
+            保存
+          </button>
+        </div>
       </div>
     </>
   );
