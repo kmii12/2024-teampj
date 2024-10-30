@@ -98,8 +98,9 @@ export default function Result() {
   return (
     <>
       <Header />
-      <SearchBar />
-
+      <div className={styles.searchBarWrap}>
+        <SearchBar />
+      </div>
       <div className={styles.resultContainer}>
         <h2 className={styles.resultTitle}>検索結果({ResultDatas.length}件)</h2>
         <ul className={styles.resultList}>
