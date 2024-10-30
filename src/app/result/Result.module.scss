@@ -7,7 +7,6 @@
 .resultContainer {
   color: $text;
   margin: 44px 0 120px 0; //resultPage全ての上下の余白
-  // border: 1px solid #000;
 
   .resultTitle {
     //検索結果
@@ -37,11 +36,16 @@
     border-bottom: 1.5px solid $text;
     width: fit-content;
   }
+  .resultList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .resultItem {
     //li
     padding: 26px 14px;
-    margin: 18px;
+    margin: 15px 0;
     width: 360px;
     height: 188px;
     background-color: #fff; //一旦
