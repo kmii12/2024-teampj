@@ -24,6 +24,10 @@ export default function Home() {
     locations: new Set(),
     features: new Set(),
   });
+
+  //searchBtn
+  const [searchText, setSearchText] = useState("");
+
   const toggleSelect = (
     category: keyof typeof selectedKeywords,
     index: number
@@ -38,12 +42,13 @@ export default function Home() {
       return { ...prevState, [category]: newSet };
     });
   };
+
   return (
     <>
       <Header />
       <input type="search" id="bookSearch" name="search" />
       <main className={styles.main}>
-        <SearchBar />
+        <SearchBar searchText={searchText} setSearchText={setSearchText} />
         <div className={styles.selectList}>
           <section className={styles.keywordWrap}>
             <div>
@@ -178,8 +183,13 @@ export default function Home() {
           >
             <p>リセット</p>
           </button>
-          <Link className={styles.searchBtn} href="/result" passHref>
-            <p>検索</p>
+          <Link
+            href={`/result?search=${encodeURIComponent(searchText)}`}
+            passHref
+          >
+            <button className={styles.searchBtn}>
+              <p>検索</p>
+            </button>
           </Link>
         </div>
       </main>

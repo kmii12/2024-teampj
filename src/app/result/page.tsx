@@ -5,9 +5,11 @@ import styles from "./Result.module.scss";
 // import { usePathname } from "next/navigation";
 import SearchBar from "@/app/components/SearchBar";
 import Header from "@/app/components/Header";
+import { useSearchParams } from "next/navigation";
 
 export default function Result() {
-  // const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const initialSearchText = searchParams.get("search") || ""; // クエリパラメータから取得
 
   //ダミーデータ（あとからfirebaseから取得）
   const ResultDatas = [
@@ -99,7 +101,7 @@ export default function Result() {
     <>
       <Header />
       <div className={styles.searchBarWrap}>
-        <SearchBar />
+        <SearchBar searchText={initialSearchText} />
       </div>
       <main className={styles.resultContainer}>
         <h2 className={styles.resultTitle}>検索結果({ResultDatas.length}件)</h2>

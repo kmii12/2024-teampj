@@ -1,8 +1,17 @@
 import { useState } from "react";
 import styles from "./SearchBar.module.scss";
+import { Dispatch, SetStateAction } from "react";
 
-export default function SearchBar() {
-  const [searchText, setSearchText] = useState("");
+interface SearchBarProps {
+  searchText: string;
+  setSearchText: Dispatch<SetStateAction<string>>;
+}
+
+export default function SearchBar({
+  searchText,
+  setSearchText,
+}: SearchBarProps) {
+  // const [searchText, setSearchText] = useState("");
 
   const clearBtn = () => {
     setSearchText("");
