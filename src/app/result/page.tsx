@@ -101,7 +101,7 @@ export default function Result() {
       <div className={styles.searchBarWrap}>
         <SearchBar />
       </div>
-      <div className={styles.resultContainer}>
+      <main className={styles.resultContainer}>
         <h2 className={styles.resultTitle}>検索結果({ResultDatas.length}件)</h2>
         <ul className={styles.resultList}>
           <div className={styles.resultItemWrap}>
@@ -129,7 +129,7 @@ export default function Result() {
             ))}
           </div>
         </ul>
-      </div>
+      </main>
     </>
   );
 }

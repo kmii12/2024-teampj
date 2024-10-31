@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import styles from "./page.module.scss";
 import data from "./data/keywords.json";
 import { Keywords } from "./types/keywords";
+import Link from "next/link";
 
 export default function Home() {
   const keywords: Keywords = data;
@@ -177,9 +178,9 @@ export default function Home() {
           >
             <p>リセット</p>
           </button>
-          <button className={styles.searchBtn}>
+          <Link className={styles.searchBtn} href="/result" passHref>
             <p>検索</p>
-          </button>
+          </Link>
         </div>
       </main>
     </>
