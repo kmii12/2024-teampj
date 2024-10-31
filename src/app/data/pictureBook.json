@@ -19,7 +19,8 @@
     "location": "日本",
     "hue": "不明",
     "atmosphere": "",
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/momotaro.jpeg"
   },
   {
     "id": 2,
@@ -33,7 +34,8 @@
     "atmosphere": ["かわいい", "怖い"],
     "genre": "昔話",
     "location": "海外",
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/littleRedRidingHood.jpeg"
   },
   {
     "id": 3,
@@ -47,7 +49,8 @@
     "location": "海外",
     "hue": "不明",
     "atmosphere": "",
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/cinderella.jpeg"
   },
   {
     "id": 4,
@@ -61,7 +64,8 @@
     "location": "海外",
     "hue": "不明",
     "atmosphere": "",
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/snowWhite.jpeg"
   },
   {
     "id": 5,
@@ -75,7 +79,8 @@
     "location": "海外",
     "hue": "不明",
     "atmosphere": "",
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/aladdin.jpeg"
   },
   {
     "id": 6,
@@ -89,7 +94,8 @@
     "location": "海外",
     "hue": "不明",
     "atmosphere": "",
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/theThreeLittlePigs.jpeg"
   },
   {
     "id": 7,
@@ -103,7 +109,8 @@
     "location": "海外",
     "hue": "不明",
     "atmosphere": "",
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/peterPan.jpeg"
   },
   {
     "id": 8,
@@ -117,7 +124,8 @@
     "location": "日本",
     "hue": "不明",
     "atmosphere": "",
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/mousesMarriage.jpeg"
   },
   {
     "id": 9,
@@ -136,7 +144,8 @@
     "location": "日本",
     "hue": "不明",
     "atmosphere": "",
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/kaguyahime.jpeg"
   },
   {
     "id": 10,
@@ -150,7 +159,8 @@
     "location": "日本",
     "hue": "不明",
     "atmosphere": "",
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/kintaro.jpeg"
   },
   {
     "id": 11,
@@ -164,7 +174,8 @@
     "location": "海外",
     "hue": "不明",
     "atmosphere": ["怖い"],
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/hanselAndGretel.jpeg"
   },
   {
     "id": 12,
@@ -178,7 +189,8 @@
     "location": "海外",
     "hue": "不明",
     "atmosphere": "",
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/jackAndTheBeanstalk.jpeg"
   },
   {
     "id": 13,
@@ -192,6 +204,7 @@
     "location": "海外",
     "hue": "不明",
     "atmosphere": ["かわいい", "夜"],
-    "season": "不明"
+    "season": "不明",
+    "image": "/img/jackAndTheBeanstalk.jpeg"
   }
 ]
