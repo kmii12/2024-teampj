@@ -186,10 +186,9 @@ export default function Home() {
           <Link
             href={`/result?search=${encodeURIComponent(searchText)}`}
             passHref
+            className={styles.searchBtn}
           >
-            <button className={styles.searchBtn}>
-              <p>検索</p>
-            </button>
+            <p>検索</p>
           </Link>
         </div>
       </main>
