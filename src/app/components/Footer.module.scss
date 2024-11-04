@@ -2,9 +2,9 @@
 
 .footer {
   width: 100%;
-  height: 14dvh;
+  height: 12dvh;
   padding-top: 1dvh;
-  background-color: $main;
+  background-color: $footer_bg;
   position: fixed;
   bottom: 0;
   nav {
@@ -23,9 +23,10 @@
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          row-gap: 6px;
           p {
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1rem;
           }
         }
       }
