@@ -18,8 +18,8 @@ export default function Footer() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
+                width="30"
+                height="30"
                 viewBox="0 0 40 40"
                 fill="none"
               >
@@ -41,8 +41,8 @@ export default function Footer() {
             <Link href="/" className={pathname === "/" ? styles.active : ""}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
+                width="30"
+                height="30"
                 viewBox="0 0 40 40"
                 fill="none"
               >
@@ -75,8 +75,8 @@ export default function Footer() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
+                width="30"
+                height="30"
                 viewBox="0 0 40 40"
                 fill="none"
               >
