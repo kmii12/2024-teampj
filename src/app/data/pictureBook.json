@@ -203,21 +203,5 @@
     "season": "不明",
     "image": "/img/jackAndTheBeanstalk.jpeg",
     "feature": ""
-  },
-  {
-    "id": 13,
-    "title": "パパ、お月さまとって！",
-    "writer": "エリック・カール",
-    "illustrator": "エリック・カール",
-    "livingThing": ["人間"],
-    "mainCharacter": "モニカ",
-    "character": ["モニカ", "パパ", "お月さま"],
-    "genre": "海外",
-    "location": "海外",
-    "hue": "不明",
-    "atmosphere": ["かわいい", "夜"],
-    "season": "不明",
-    "image": "/img/jackAndTheBeanstalk.jpeg",
-    "feature": ""
   }
 ]
