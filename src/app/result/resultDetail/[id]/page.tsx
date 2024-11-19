@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import detailStyles from "./ResultDetail.module.scss";
 import styles from "../../Result.module.scss";
+import Link from "next/link";
 
 interface ResultData {
   id: number;
@@ -139,7 +140,7 @@ const ResultDetail: React.FC = () => {
           </div>
           <div className={detailStyles.itemDescriptionWrap}>
             <h1 className="title">
-              <span className={detailStyles.smallLabel}>題名</span>　
+              <span className={detailStyles.smallLabel}>題名</span>
               {resultDetails.title}
             </h1>
             <div className={detailStyles.fixedBottom}>
