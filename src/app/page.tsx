@@ -209,14 +209,14 @@
 "use client";
 
 import Header from "./components/Header";
-import SearchBar from "./components/SearchBar";
+// import SearchBar from "./components/SearchBar";
 import styles from "./page.module.scss";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <SearchBar />
+      {/* <SearchBar /> */}
       <div className={styles.questionWrap}>
         <div className={styles.question}>
           {/* 仮でとりあえず */}
