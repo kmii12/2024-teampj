@@ -240,12 +240,15 @@ export default function Result() {
   useEffect(() => {
     async function fetchData() {
       try {
-        console.log("Fetching data from API...");
+        console.log("APIへ接続中");
         const response = await fetch("/api/getBooksData");
+        // if (!response.ok) {
+        //   throw new Error("データ取得失敗");
+        // }
         console.log("API Response:", response);
         const data = await response.json();
         // console.log("Parsed Data:", data);
-        setStoryBooks(data);
+        setStoryBooks(data.books);
       } catch (error) {
         console.error("データの取得に失敗", error);
       }
