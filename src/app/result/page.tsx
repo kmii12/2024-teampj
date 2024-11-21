@@ -142,7 +142,7 @@ import { PictureBook } from "../types/pictureBook";
 import data from "../data/pictureBook.json";
 import styles from "./Result.module.scss";
 import Header from "../components/Header";
-import SearchBar from "../components/SearchBar";
+// import SearchBar from "../components/SearchBar";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -206,7 +206,7 @@ export default function Result() {
     <>
       <Header />
       <div className={styles.searchBarWrap}>
-        <SearchBar searchText={initialSearchText} />
+        {/* <SearchBar searchText={initialSearchText} /> */}
       </div>
       <main className={styles.resultContainer}>
         <h2 className={styles.resultTitle}>
