@@ -81,7 +81,7 @@
     position: relative;
     display: inline-block;
     padding: 16px 8px;
-    border: 1.5px solid $text;
+    border: 2px solid $text;
     border-radius: 4px;
     background-color: $white;
     text-align: left;
@@ -148,13 +148,15 @@
 }
 
 .btnWrap {
-  padding: 0 1.6rem;
+  width: 100%;
   position: fixed;
   bottom: 18dvh;
   display: flex;
+  justify-content: space-evenly;
   column-gap: 0.8rem;
+  align-items: end;
   button {
-    padding: 0.8rem 2rem;
+    padding: 0.2rem 1.6rem;
     border: 2px solid $text;
     background-color: $white;
     border-radius: 8px;
