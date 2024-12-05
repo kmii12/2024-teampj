@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 
 //firesbase
 import { db } from "@/firebase";
+
+// console.log(db);
+
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 interface PictureBook {
@@ -118,11 +121,15 @@ export default function Result() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const query = await getDocs(collection(db, "picturebooks"));
-      const data = query.docs.map((doc) => ({
+      //dbに picturebooksのコレクションを設定
+      const querySnapshot = await getDocs(collection(db, "picturebooks"));
+      // console.log(querySnapshot);
+      //dataに配列として挿入
+      const data = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
+      console.log("絵本データ:", data);
       setResultDates(data);
     };
     fetchData();
