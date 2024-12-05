@@ -21,6 +21,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-// Firestoreを初期化
+// Firestore初期化
 const db = getFirestore(app);
 export { app, db, analytics };
