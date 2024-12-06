@@ -31,7 +31,27 @@ export default function Home() {
     }
   };
 
-  console.log(db);
+  //みき編集中
+  // const fetchBooks = async () => {
+  //   try {
+  //     const booksCollection = collection(db, "picturebooks");
+  //     console.log(booksCollection);
+
+  //     // const q = query(booksCollection); // クエリの条件を追加する場合
+
+  //     const querySnapshot = await getDocs(booksCollection);
+  //     const books = querySnapshot.docs.map((doc) => doc.data());
+  //     console.log(books); // 取得したデータをログに出力
+
+  //     // setBookCount(querySnapshot.size); // 絵本の冊数を保存
+  //   } catch (error) {
+  //     console.log(db);
+
+  //     console.error("Firestoreからデータを取得できませんでした:", error);
+  //   }
+  // };
+
+  // console.log(db);
 
   // ページロード時にFirestoreデータを取得
   useEffect(() => {
