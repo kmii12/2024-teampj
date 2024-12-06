@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 //firesbase
 import { db } from "@/firebase";
 
-// console.log(db);
+console.log(db);
 
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
