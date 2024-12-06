@@ -1,3 +1,4 @@
+// /app/data/questions.js
 export const questions = [
   {
     id: 1,
@@ -11,13 +12,12 @@ export const questions = [
       { label: "迷路", value: "type_maze" },
     ],
   },
-  // {
-  //   id: 2,
-  //   question: "対象年齢を選んでください",
-  //   options: [
-  //     { label: "0〜3歳", value: "age_0_3" },
-  //     { label: "4〜6歳", value: "age_4_6" },
-  //     { label: "7歳以上", value: "age_7_plus" },
-  //   ],
-  // },
+  {
+    id: 2,
+    question: "Q2.絵本は日本作品?海外作品?",
+    options: [
+      { label: "日本", value: "location_japan" },
+      { label: "海外", value: "location_abroad" },
+    ],
+  },
 ];

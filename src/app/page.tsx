@@ -1,50 +1,74 @@
 "use client";
-import { useState } from "react";
-import { questions } from "../app/data/questions";
-import { searchBooks } from "../app/utils/firebaseQueries";
 import styles from "./page.module.scss";
 import Header from "./components/Header";
 import Link from "next/link";
-
-// 型定義
-interface Question {
-  id: string;
-  question: string;
-  options: { value: string; label: string }[];
-}
-
-interface Book {
-  id: string;
-  title: string;
-  ageGroup: string;
-}
+import { questions } from "./data/questions";
+import { collection, getDocs, query } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db } from "@/firebase";
 
 export default function Home() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [results, setResults] = useState<Book[] | null>(null);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 現在の質問インデックス
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]); // 選択されたオプションを管理
+  // const [bookCount, setBookCount] = useState<number>(0); // 見つかった絵本の冊数
 
-  const handleOptionSelect = (optionValue: string) => {
-    const questionId = questions[currentQuestionIndex].id;
-    setAnswers((prev) => ({
-      ...prev,
-      [questionId]: optionValue,
-    }));
+  // 現在の質問データ
+  const currentQuestion = questions[currentQuestionIndex];
 
-    setSelectedOption(optionValue);
+  // Firestoreから絵本のデータを取得
+  const fetchBooks = async () => {
+    try {
+      const booksCollection = collection(db, "picturebooks");
+      const q = query(booksCollection); // クエリの条件を追加する場合
 
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
-      setSelectedOption(null); // 次の質問に移るときに選択をリセット
-    } else {
-      fetchResults({ ...answers, [questionId]: optionValue });
+      const querySnapshot = await getDocs(q);
+      const books = querySnapshot.docs.map((doc) => doc.data());
+      console.log(books); // 取得したデータをログに出力
+
+      // setBookCount(querySnapshot.size); // 絵本の冊数を保存
+    } catch (error) {
+      console.error("Firestoreからデータを取得できませんでした:", error);
     }
   };
 
-  const fetchResults = async (filters: Record<string, string>) => {
-    const books = await searchBooks(filters);
-    setResults(books);
+  console.log(db);
+
+  // ページロード時にFirestoreデータを取得
+  useEffect(() => {
+    // const fetchData = async () => {
+    //   const querySnapshot = await getDocs(collection(db, "picturebooks"));
+    //   console.log(querySnapshot);
+
+    //   const data = querySnapshot.docs.map((doc) => ({
+    //     id: doc.id,
+    //     ...doc.data(),
+    //   }));
+
+    //   console.log("絵本データ:", data);
+    // };
+    // fetchData();
+    fetchBooks();
+  }, []);
+
+  // オプション選択時の処理
+  const handleOptionSelect = (value: string) => {
+    const updatedOptions = [...selectedOptions];
+    updatedOptions[currentQuestionIndex] = value;
+    setSelectedOptions(updatedOptions);
+  };
+
+  // 次の質問へ進む
+  const handleNext = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    }
+  };
+
+  // 前の質問に戻る
+  const handleBack = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+    }
   };
 
   return (
@@ -52,17 +76,21 @@ export default function Home() {
       <Header />
       <div className={styles.questionWrap}>
         <div className={styles.question}>
-          <p>{questions[currentQuestionIndex].question}</p>
+          <p>{currentQuestion.question}</p>
         </div>
         <div className={styles.cat}></div>
       </div>
       <div className={styles.answerWrap}>
         <ul>
-          {questions[currentQuestionIndex].options.map((option) => (
+          {currentQuestion.options.map((option) => (
             <li
               key={option.value}
               onClick={() => handleOptionSelect(option.value)}
-              className={selectedOption === option.value ? "selected" : ""}
+              className={
+                selectedOptions[currentQuestionIndex] === option.value
+                  ? styles.selected
+                  : ""
+              }
             >
               {option.label}
             </li>
@@ -70,16 +98,20 @@ export default function Home() {
         </ul>
       </div>
       <div className={styles.btnWrap}>
-        <button>
-          <Link href="#">戻る</Link>
+        <button onClick={handleBack} disabled={currentQuestionIndex === 0}>
+          戻る
         </button>
         <button>
-          <Link href="/test-result">
-            <span>見つかった絵本(13冊)</span>検索
+          <Link href="/result">
+            {/* <span>見つかった絵本({bookCount}冊)</span>検索 */}
+            <span>見つかった絵本(5冊)</span>検索
           </Link>
         </button>
-        <button>
-          <Link href="">次へ</Link>
+        <button
+          onClick={handleNext}
+          disabled={currentQuestionIndex === questions.length - 1}
+        >
+          次へ
         </button>
       </div>
     </>
