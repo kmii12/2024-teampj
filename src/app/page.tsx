@@ -10,7 +10,7 @@ import { db } from "@/firebase";
 export default function Home() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 現在の質問インデックス
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]); // 選択されたオプションを管理
-  // const [bookCount, setBookCount] = useState<number>(0); // 見つかった絵本の冊数
+  const [bookCount, setBookCount] = useState<number>(0); // 見つかった絵本の冊数
 
   // 現在の質問データ
   const currentQuestion = questions[currentQuestionIndex];
@@ -19,13 +19,13 @@ export default function Home() {
   const fetchBooks = async () => {
     try {
       const booksCollection = collection(db, "picturebooks");
-      const q = query(booksCollection); // クエリの条件を追加する場合
+      // const q = query(booksCollection); // クエリの条件を追加する場合
 
-      const querySnapshot = await getDocs(q);
+      const querySnapshot = await getDocs(booksCollection);
       const books = querySnapshot.docs.map((doc) => doc.data());
       console.log(books); // 取得したデータをログに出力
 
-      // setBookCount(querySnapshot.size); // 絵本の冊数を保存
+      setBookCount(querySnapshot.size); // 絵本の冊数を保存
     } catch (error) {
       console.error("Firestoreからデータを取得できませんでした:", error);
     }
@@ -35,18 +35,18 @@ export default function Home() {
 
   // ページロード時にFirestoreデータを取得
   useEffect(() => {
-    // const fetchData = async () => {
-    //   const querySnapshot = await getDocs(collection(db, "picturebooks"));
-    //   console.log(querySnapshot);
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "picturebooks"));
+      console.log(querySnapshot);
 
-    //   const data = querySnapshot.docs.map((doc) => ({
-    //     id: doc.id,
-    //     ...doc.data(),
-    //   }));
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-    //   console.log("絵本データ:", data);
-    // };
-    // fetchData();
+      console.log("絵本データ:", data);
+    };
+    fetchData();
     fetchBooks();
   }, []);
 
@@ -102,9 +102,9 @@ export default function Home() {
           戻る
         </button>
         <button>
-          <Link href="/result">
-            {/* <span>見つかった絵本({bookCount}冊)</span>検索 */}
-            <span>見つかった絵本(5冊)</span>検索
+          <Link href="/test-result">
+            <span>見つかった絵本({bookCount}冊)</span>検索
+            {/* <span>見つかった絵本(5冊)</span>検索 */}
           </Link>
         </button>
         <button
