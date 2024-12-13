@@ -139,6 +139,7 @@
       padding: 0.2rem 1.2rem;
       border-radius: 16px;
       border: 1.5px solid $sub;
+      cursor: pointer;
       &.selected {
         background-color: $sub;
         color: $white;

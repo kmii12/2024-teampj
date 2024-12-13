@@ -233,8 +233,9 @@ interface PictureBook {
 
 export default function Home() {
   //絵本データ取得する
-  const [fullDatas, setFullDatas] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [fullDatas, setFullDatas] = useState<PictureBook[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  // const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   // const selectedCategories = ["type_story", "type_trick"];
   const [filteredDatas, setFilteredDatas] = useState<PictureBook[]>([]); // 絞り込まれたデータ
 
@@ -253,22 +254,19 @@ export default function Home() {
 
   useEffect(() => {
     //カテゴリ選択と合わせてデータを絞り込む
-    const filtered = fullDatas.filter((item) =>
-      selectedCategories.includes(item.category)
-    );
+    if (selectedCategory) {
+      const filtered = fullDatas.filter(
+        (item) => item.category === selectedCategory
+      );
+      console.log("選択したcategoryに一致するデータ", filtered);
+      setFilteredDatas(filtered);
+    }
+  }, [fullDatas, selectedCategory]);
 
-    console.log("選択したcategoryに一致するデータ", filtered);
-
-    setFilteredDatas(filtered);
-  }, [fullDatas, selectedCategories]);
-
-  // カテゴリを選択・解除する処理
+  //一つのみ選択可能 このエラー無視でも動く！一旦
   const toggleCategory = (category: string) => {
-    setSelectedCategories(
-      (prev) =>
-        prev.includes(category)
-          ? prev.filter((cat) => cat !== category) // すでに選択されている場合は解除
-          : [...prev, category] // 未選択の場合は追加
+    setSelectedCategory((prevCategory) =>
+      prevCategory === category ? null : category
     );
   };
 
@@ -298,11 +296,25 @@ export default function Home() {
             </li>
           ))} */}
 
-          <li value="type_story" onClick={() => toggleCategory("type_story")}>
+          <li
+            value="type_story"
+            onClick={() => toggleCategory("type_story")}
+            style={{
+              cursor: "pointer",
+              color: selectedCategory.includes("type_story") ? "blue" : "",
+            }}
+          >
             物語メイン
           </li>
 
-          <li value="type_trick" onClick={() => toggleCategory("type_trick")}>
+          <li
+            value="type_trick"
+            onClick={() => toggleCategory("type_trick")}
+            style={{
+              cursor: "pointer",
+              color: selectedCategory.includes("type_trick") ? "blue" : "",
+            }}
+          >
             仕掛け絵本
           </li>
         </ul>
