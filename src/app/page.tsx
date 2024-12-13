@@ -211,8 +211,51 @@
 import Header from "./components/Header";
 // import SearchBar from "./components/SearchBar";
 import styles from "./page.module.scss";
+import { useEffect, useState } from "react";
+
+//firebase
+import { db } from "@/firebase";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
+// console.log(db);
+
+interface PictureBook {
+  id: string;
+  title: string;
+  writer: string;
+  image: string;
+  mainCharacter: string;
+  character: string[];
+  genre: string;
+  location: string;
+  atmosphere: string[];
+}
 
 export default function Home() {
+  //絵本データ取得する
+  const [fullDatas, setFullDatas] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "picturebooks"));
+
+      const data = querySnapshot.docs.map((doc) => {
+        const docData = doc.data();
+        const category = docData.category;
+        console.log(category);
+
+        return {
+          id: doc.id,
+          ...docData,
+        };
+      });
+      console.log("絵本データ", data);
+      setFullDatas(data);
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <Header />
@@ -226,12 +269,15 @@ export default function Home() {
       </div>
       <div className={styles.answerWrap}>
         <ul>
-          <li>物語メイン</li>
+          {fullDatas.map((full) => (
+            <li key={full.id}> {full.category}</li>
+          ))}
+          {/* <li>物語メイン</li>
           <li>布製</li>
           <li>仕掛け絵本</li>
           <li>形が特殊</li>
           <li>間違い探し</li>
-          <li>迷路</li>
+          <li>迷路</li> */}
         </ul>
       </div>
       <div className={styles.btnWrap}>
