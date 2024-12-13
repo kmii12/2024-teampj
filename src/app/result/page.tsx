@@ -45,7 +45,14 @@ export default function Result() {
           <div className={styles.resultItemWrap}>
             {filteredDatas.map((result) => (
               <li key={result.id} className={styles.resultItem}>
-                <Link href={`/result/resultDetail/${result.id}`}>
+                <Link
+                  href={{
+                    pathname: `/result/resultDetail/${result.id}`,
+                    query: {
+                      data: encodeURIComponent(JSON.stringify(filteredDatas)),
+                    },
+                  }}
+                >
                   <div className={styles.resultItemWrap}>
                     <div className={styles.itemImageWrap}>
                       <div className={styles.imgWrap}>
