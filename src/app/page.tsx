@@ -235,26 +235,49 @@ export default function Home() {
   //絵本データ取得する
   const [fullDatas, setFullDatas] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  // const selectedCategories = ["type_story", "type_trick"];
+  const [filteredDatas, setFilteredDatas] = useState<PictureBook[]>([]); // 絞り込まれたデータ
 
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(db, "picturebooks"));
-
-      const data = querySnapshot.docs.map((doc) => {
-        const docData = doc.data();
-        const category = docData.category;
-        console.log(category);
-
-        return {
-          id: doc.id,
-          ...docData,
-        };
-      });
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as PictureBook[];
       console.log("絵本データ", data);
       setFullDatas(data);
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    //カテゴリ選択と合わせてデータを絞り込む
+    const filtered = fullDatas.filter((item) =>
+      selectedCategories.includes(item.category)
+    );
+
+    console.log("選択したcategoryに一致するデータ", filtered);
+
+    setFilteredDatas(filtered);
+  }, [fullDatas, selectedCategories]);
+
+  // カテゴリを選択・解除する処理
+  const toggleCategory = (category: string) => {
+    setSelectedCategories(
+      (prev) =>
+        prev.includes(category)
+          ? prev.filter((cat) => cat !== category) // すでに選択されている場合は解除
+          : [...prev, category] // 未選択の場合は追加
+    );
+  };
+
+  // //選択したcategoryに一致するデータをフィルタリング
+  // const filterCategoryDatas = fullDatas.filter((item) =>
+  //   // item.category.some((cat: string) => selectedCategories.includes(cat))
+  //   selectedCategories.includes(item.category)
+  // );
+  // console.log("カテゴリ", filterCategoryDatas);
 
   return (
     <>
@@ -269,15 +292,19 @@ export default function Home() {
       </div>
       <div className={styles.answerWrap}>
         <ul>
-          {fullDatas.map((full) => (
-            <li key={full.id}> {full.category}</li>
-          ))}
-          {/* <li>物語メイン</li>
-          <li>布製</li>
-          <li>仕掛け絵本</li>
-          <li>形が特殊</li>
-          <li>間違い探し</li>
-          <li>迷路</li> */}
+          {/* {fullDatas.map((full) => (
+            <li key={full.id} onClick={() => toggleCategory(full.category)}>
+              {}
+            </li>
+          ))} */}
+
+          <li value="type_story" onClick={() => toggleCategory("type_story")}>
+            物語メイン
+          </li>
+
+          <li value="type_trick" onClick={() => toggleCategory("type_trick")}>
+            仕掛け絵本
+          </li>
         </ul>
       </div>
       <div className={styles.btnWrap}>
