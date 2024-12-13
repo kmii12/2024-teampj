@@ -212,6 +212,7 @@ import Header from "./components/Header";
 // import SearchBar from "./components/SearchBar";
 import styles from "./page.module.scss";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 //firebase
 import { db } from "@/firebase";
@@ -238,6 +239,7 @@ export default function Home() {
   // const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   // const selectedCategories = ["type_story", "type_trick"];
   const [filteredDatas, setFilteredDatas] = useState<PictureBook[]>([]); // 絞り込まれたデータ
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -263,19 +265,25 @@ export default function Home() {
     }
   }, [fullDatas, selectedCategory]);
 
-  //一つのみ選択可能 このエラー無視でも動く！一旦
+  const handleSearch = () => {
+    //カテゴリでフィルタリング(検索押すときに)
+
+    if (selectedCategory) {
+      const queryParam = encodeURIComponent(JSON.stringify(filteredDatas));
+      router.push(`/result?data=${queryParam}`);
+    } else {
+      console.log("選択されたデータがありません");
+    }
+  };
+
+  //一つのみ選択可能
+  //このエラー無視でも動く！一旦 nullの場合仮定してないからかなー
+  //めんどいので後回し
   const toggleCategory = (category: string) => {
     setSelectedCategory((prevCategory) =>
       prevCategory === category ? null : category
     );
   };
-
-  // //選択したcategoryに一致するデータをフィルタリング
-  // const filterCategoryDatas = fullDatas.filter((item) =>
-  //   // item.category.some((cat: string) => selectedCategories.includes(cat))
-  //   selectedCategories.includes(item.category)
-  // );
-  // console.log("カテゴリ", filterCategoryDatas);
 
   return (
     <>
@@ -301,7 +309,7 @@ export default function Home() {
             onClick={() => toggleCategory("type_story")}
             style={{
               cursor: "pointer",
-              color: selectedCategory.includes("type_story") ? "blue" : "",
+              color: selectedCategory.includes("type_story") ? "brown" : "",
             }}
           >
             物語メイン
@@ -312,7 +320,7 @@ export default function Home() {
             onClick={() => toggleCategory("type_trick")}
             style={{
               cursor: "pointer",
-              color: selectedCategory.includes("type_trick") ? "blue" : "",
+              color: selectedCategory.includes("type_trick") ? "brown" : "",
             }}
           >
             仕掛け絵本
@@ -323,9 +331,9 @@ export default function Home() {
         <button>
           <p>戻る</p>
         </button>
-        <button>
+        <button onClick={handleSearch}>
           <p>
-            <span>見つかった絵本(13冊)</span>検索
+            <span>見つかった絵本{filteredDatas.length}冊</span>検索
           </p>
         </button>
         <button>
