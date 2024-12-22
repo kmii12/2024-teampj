@@ -3,9 +3,36 @@ import styles from "./page.module.scss";
 import Header from "./components/Header";
 import Link from "next/link";
 import { questions } from "./data/questions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "@/firebase";
 
 export default function Home() {
+  // firebase
+  // Firebaseデータ取得用ステート
+  const [picturebooks, setPicturebooks] = useState<any[]>([]);
+  useEffect(() => {
+    // Firebaseからデータを取得する非同期関数
+    const fetchPicturebooks = async () => {
+      try {
+        const q = query(collection(db, "picturebooks"));
+        const querySnapshot = await getDocs(q);
+        const books: any[] = [];
+        querySnapshot.forEach((doc) => {
+          // doc.data() は常に定義されています
+          books.push({ id: doc.id, ...doc.data() });
+        });
+        setPicturebooks(books); // ステートにデータを保存
+        console.log("Books fetched:", books);
+      } catch (error) {
+        console.error("Error fetching picturebooks:", error);
+      }
+    };
+
+    fetchPicturebooks(); // 非同期関数を呼び出し
+  }, []); // 空の依存配列で初回レンダリング時のみ実行
+
+  // 回答選択・質問進む戻る
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 現在の質問インデックス
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]); // 選択されたオプションを管理
 

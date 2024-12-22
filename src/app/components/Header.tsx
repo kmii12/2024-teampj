@@ -3,7 +3,7 @@
 export default function Header() {
   return (
     <header style={header}>
-      <h1 style={title}>ロゴ</h1>
+      <h1 style={title}></h1>
     </header>
   );
 }
