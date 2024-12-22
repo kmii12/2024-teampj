@@ -3,52 +3,41 @@ import styles from "./page.module.scss";
 import Header from "./components/Header";
 import Link from "next/link";
 import { questions } from "./data/questions";
-import { collection, getDocs, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
 
 export default function Home() {
+  // firebase
+  // Firebaseデータ取得用ステート
+  const [picturebooks, setPicturebooks] = useState<any[]>([]);
+  useEffect(() => {
+    // Firebaseからデータを取得する非同期関数
+    const fetchPicturebooks = async () => {
+      try {
+        const q = query(collection(db, "picturebooks"));
+        const querySnapshot = await getDocs(q);
+        const books: any[] = [];
+        querySnapshot.forEach((doc) => {
+          // doc.data() は常に定義されています
+          books.push({ id: doc.id, ...doc.data() });
+        });
+        setPicturebooks(books); // ステートにデータを保存
+        console.log("Books fetched:", books);
+      } catch (error) {
+        console.error("Error fetching picturebooks:", error);
+      }
+    };
+
+    fetchPicturebooks(); // 非同期関数を呼び出し
+  }, []); // 空の依存配列で初回レンダリング時のみ実行
+
+  // 回答選択・質問進む戻る
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 現在の質問インデックス
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]); // 選択されたオプションを管理
-  // const [bookCount, setBookCount] = useState<number>(0); // 見つかった絵本の冊数
 
   // 現在の質問データ
   const currentQuestion = questions[currentQuestionIndex];
-
-  // Firestoreから絵本のデータを取得
-  const fetchBooks = async () => {
-    try {
-      const booksCollection = collection(db, "picturebooks");
-      const q = query(booksCollection); // クエリの条件を追加する場合
-
-      const querySnapshot = await getDocs(q);
-      const books = querySnapshot.docs.map((doc) => doc.data());
-      console.log(books); // 取得したデータをログに出力
-
-      // setBookCount(querySnapshot.size); // 絵本の冊数を保存
-    } catch (error) {
-      console.error("Firestoreからデータを取得できませんでした:", error);
-    }
-  };
-
-  console.log(db);
-
-  // ページロード時にFirestoreデータを取得
-  useEffect(() => {
-    // const fetchData = async () => {
-    //   const querySnapshot = await getDocs(collection(db, "picturebooks"));
-    //   console.log(querySnapshot);
-
-    //   const data = querySnapshot.docs.map((doc) => ({
-    //     id: doc.id,
-    //     ...doc.data(),
-    //   }));
-
-    //   console.log("絵本データ:", data);
-    // };
-    // fetchData();
-    fetchBooks();
-  }, []);
 
   // オプション選択時の処理
   const handleOptionSelect = (value: string) => {
