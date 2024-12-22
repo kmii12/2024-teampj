@@ -1,30 +1,27 @@
 "use client";
 
-import Link from "next/link";
+// import Link from "next/link";
 import styles from "./Result.module.scss";
 // import { usePathname } from "next/navigation";
-import SearchBar from "@/app/components/SearchBar";
+// import SearchBar from "@/app/components/SearchBar";
 import Header from "@/app/components/Header";
-import { useEffect, useState } from "react";
-
-//firesbase
+// import { useEffect, useState } from "react";
 import { db } from "@/firebase";
 
+//firesbase
 console.log(db);
 
-import { getFirestore, collection, getDocs } from "firebase/firestore";
-
-interface PictureBook {
-  id: string;
-  title: string;
-  writer: string;
-  image: string;
-  mainCharacter: string;
-  character: string[];
-  genre: string;
-  location: string;
-  atmosphere: string[];
-}
+// interface PictureBook {
+//   id: string;
+//   title: string;
+//   writer: string;
+//   image: string;
+//   mainCharacter: string;
+//   character: string[];
+//   genre: string;
+//   location: string;
+//   atmosphere: string[];
+// }
 
 export default function Result() {
   // const pathname = usePathname();
@@ -117,45 +114,46 @@ export default function Result() {
   // ];
 
   //firebaseの絵本データ
-  const [resultDatas, setResultDates] = useState([]);
+  // const [resultDatas, setResultDates] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      //dbに picturebooksのコレクションを設定
-      const querySnapshot = await getDocs(collection(db, "picturebooks"));
-      // console.log(querySnapshot);
-      //dataに配列として挿入
-      const data = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      console.log("絵本データ:", data);
-      setResultDates(data);
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     //dbに picturebooksのコレクションを設定
+  //     const querySnapshot = await getDocs(collection(db, "picturebooks"));
+  //     // console.log(querySnapshot);
+  //     //dataに配列として挿入
+  //     const data = querySnapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     }));
+  //     console.log("絵本データ:", data);
+  //     setResultDates(data);
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
     <>
       <Header />
-      <div className={styles.searchBarWrap}>
-        <SearchBar />
-      </div>
+      <div className={styles.searchBarWrap}>{/* <SearchBar /> */}</div>
       <main className={styles.resultContainer}>
-        <h2 className={styles.resultTitle}>検索結果({resultDatas.length}件)</h2>
+        <h2 className={styles.resultTitle}>
+          {/* 検索結果({resultDatas.length}件) */}
+          検索結果(5件)
+        </h2>
         <ul className={styles.resultList}>
           <div className={styles.resultItemWrap}>
-            {resultDatas.map((result) => (
+            {/* {resultDatas.map((result) => (
               <li key={result.id} className={styles.resultItem}>
                 <Link href={`/result/resultDetail/${result.id}`}>
                   <div className={styles.resultItemWrap}>
                     <div className={styles.itemImageWrap}>
                       <div className={styles.imgWrap}>
-                        {/* <img
+                        <img
                           src="../../../public/img/hanselAndGretel.jpeg"
                           // alt={result.title}
                           className={styles.image}
-                        /> */}
+                        />
                       </div>
                     </div>
 
@@ -169,121 +167,10 @@ export default function Result() {
                   </div>
                 </Link>
               </li>
-            ))}
+            ))} */}
           </div>
         </ul>
       </main>
     </>
   );
 }
-
-// "use client";
-
-// import { useSearchParams } from "next/navigation";
-// import { useEffect, useState } from "react";
-// import { PictureBook } from "../types/pictureBook";
-// import data from "../data/pictureBook.json";
-// import styles from "./Result.module.scss";
-// import Header from "../components/Header";
-// // import SearchBar from "../components/SearchBar";
-// import Link from "next/link";
-// import Image from "next/image";
-
-// export default function Result() {
-//   const searchParams = useSearchParams();
-//   const [filteredBooks, setFilteredBooks] = useState<PictureBook[]>([]);
-
-//   useEffect(() => {
-//     const selectedKeywords = JSON.parse(
-//       searchParams.get("selectedKeywords") || "{}"
-//     );
-
-//     // 絞り込みロジック：各キーワードカテゴリーに基づき、データをフィルタリング
-//     const filteredBooksData = data.filter((book: PictureBook) => {
-//       const matchesSeason =
-//         selectedKeywords.seasons.length === 0 ||
-//         selectedKeywords.seasons.includes(book.season);
-
-//       const matchesLivingThing =
-//         selectedKeywords.livingThings.length === 0 ||
-//         (Array.isArray(book.livingThing) &&
-//           book.livingThing.length > 0 &&
-//           book.livingThing.some((thing) =>
-//             selectedKeywords.livingThings.includes(thing)
-//           ));
-
-//       const matchesHue =
-//         selectedKeywords.hue.length === 0 ||
-//         selectedKeywords.hue.includes(book.hue);
-
-//       const matchesAtmosphere =
-//         selectedKeywords.atmosphere.length === 0 ||
-//         (Array.isArray(book.atmosphere) &&
-//           book.atmosphere.length > 0 &&
-//           book.atmosphere.some((atm) =>
-//             selectedKeywords.atmosphere.includes(atm)
-//           ));
-
-//       const matchesLocation =
-//         selectedKeywords.locations.length === 0 ||
-//         selectedKeywords.locations.includes(book.location);
-
-//       const matchesFeature =
-//         selectedKeywords.features.length === 0 ||
-//         selectedKeywords.features.includes(book.feature);
-
-//       return (
-//         matchesSeason &&
-//         matchesLivingThing &&
-//         matchesHue &&
-//         matchesAtmosphere &&
-//         matchesLocation &&
-//         matchesFeature
-//       );
-//     });
-
-//     setFilteredBooks(filteredBooksData);
-//   }, [searchParams]);
-
-//   return (
-//     <>
-//       <Header />
-//       <div className={styles.searchBarWrap}>
-//         {/* <SearchBar searchText={initialSearchText} /> */}
-//       </div>
-//       <main className={styles.resultContainer}>
-//         <h2 className={styles.resultTitle}>
-//           検索結果({filteredBooks.length}件)
-//         </h2>
-//         <ul className={styles.resultList}>
-//           <div className={styles.resultItemWrap}>
-//             {filteredBooks.map((result) => (
-//               <li key={result.id} className={styles.resultItem}>
-//                 <Link href={`/result/resultDetail/${result.id}`}>
-//                   <div className={styles.resultItemWrap}>
-//                     <div className={styles.itemImageWrap}>
-//                       <Image
-//                         src={result.image}
-//                         alt={result.title}
-//                         className={styles.image}
-//                         width={200}
-//                         height={200}
-//                       />
-//                     </div>
-//                     <div className={styles.itemDescriptionWrap}>
-//                       <h3 className="title">題名　{result.title}</h3>
-//                       <div className={styles.fixedBottom}>
-//                         <p className="writer">作者　{result.writer}</p>
-//                         <p className="illustrator">絵　{result.illustrator}</p>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </Link>
-//               </li>
-//             ))}
-//           </div>
-//         </ul>
-//       </main>
-//     </>
-//   );
-// }
