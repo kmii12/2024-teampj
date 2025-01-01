@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./SearchBar.module.scss";
 import { Dispatch, SetStateAction } from "react";
 

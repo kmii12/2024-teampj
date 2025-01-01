@@ -1,77 +1,63 @@
 "use client";
 import styles from "./page.module.scss";
+import Header from "./components/Header";
+import Link from "next/link";
+import { questions } from "./data/questions";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-
-//firebase
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
-
-// console.log(db);
-
-interface PictureBook {
-  id: string;
-  title: string;
-  writer: string;
-  image: string;
-  mainCharacter: string;
-  character: string[];
-  genre: string;
-  location: string;
-  atmosphere: string[];
-}
 
 export default function Home() {
-  //絵本データ取得する
-  const [fullDatas, setFullDatas] = useState<PictureBook[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-  // const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  // const selectedCategories = ["type_story", "type_trick"];
-  const [filteredDatas, setFilteredDatas] = useState<PictureBook[]>([]); // 絞り込まれたデータ
-  const router = useRouter();
-
+  // firebase
+  // Firebaseデータ取得用ステート
+  const [picturebooks, setPicturebooks] = useState<any[]>([]);
   useEffect(() => {
-    const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, "picturebooks"));
-      const data = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as PictureBook[];
-      console.log("絵本データ", data);
-      setFullDatas(data);
+    // Firebaseからデータを取得する非同期関数
+    const fetchPicturebooks = async () => {
+      try {
+        const q = query(collection(db, "picturebooks"));
+        const querySnapshot = await getDocs(q);
+        const books: any[] = [];
+        querySnapshot.forEach((doc) => {
+          // doc.data() は常に定義されています
+          books.push({ id: doc.id, ...doc.data() });
+        });
+        setPicturebooks(books); // ステートにデータを保存
+        console.log("Books fetched:", books);
+      } catch (error) {
+        console.error("Error fetching picturebooks:", error);
+      }
     };
-    fetchData();
-  }, []);
 
-  useEffect(() => {
-    //カテゴリ選択と合わせてデータを絞り込む
-    if (selectedCategory) {
-      const filtered = fullDatas.filter(
-        (item) => item.category === selectedCategory
-      );
-      console.log("選択したcategoryに一致するデータ", filtered);
-      setFilteredDatas(filtered);
-    }
-  }, [fullDatas, selectedCategory]);
+    fetchPicturebooks(); // 非同期関数を呼び出し
+  }, []); // 空の依存配列で初回レンダリング時のみ実行
 
-  const handleSearch = () => {
-    //カテゴリでフィルタリング(検索押すときに)
+  // 回答選択・質問進む戻る
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 現在の質問インデックス
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]); // 選択されたオプションを管理
 
-    if (selectedCategory) {
-      const queryParam = encodeURIComponent(JSON.stringify(filteredDatas));
-      router.push(`/result?data=${queryParam}`);
-    } else {
-      console.log("選択されたデータがありません");
+  // 現在の質問データ
+  const currentQuestion = questions[currentQuestionIndex];
+
+  // オプション選択時の処理
+  const handleOptionSelect = (value: string) => {
+    const updatedOptions = [...selectedOptions];
+    updatedOptions[currentQuestionIndex] = value;
+    setSelectedOptions(updatedOptions);
+  };
+
+  // 次の質問へ進む
+  const handleNext = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
 
-  //一つのみ選択可能
-  //このエラー無視でも動く！一旦 nullの場合仮定してないからかなー
-  //めんどいので後回し
-  const toggleCategory = (category: string) => {
-    setSelectedCategory((prevCategory) =>
-      prevCategory === category ? null : category
-    );
+  // 前の質問に戻る
+  const handleBack = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+    }
   };
 
   return (
@@ -85,43 +71,30 @@ export default function Home() {
       </div>
       <div className={styles.answerWrap}>
         <ul>
-          {/* {fullDatas.map((full) => (
-            <li key={full.id} onClick={() => toggleCategory(full.category)}>
-              {}
+          {currentQuestion.options.map((option) => (
+            <li
+              key={option.value}
+              onClick={() => handleOptionSelect(option.value)}
+              className={
+                selectedOptions[currentQuestionIndex] === option.value
+                  ? styles.selected
+                  : ""
+              }
+            >
+              {option.label}
             </li>
-          ))} */}
-
-          <li
-            value="type_story"
-            onClick={() => toggleCategory("type_story")}
-            style={{
-              cursor: "pointer",
-              color: selectedCategory.includes("type_story") ? "brown" : "",
-            }}
-          >
-            物語メイン
-          </li>
-
-          <li
-            value="type_trick"
-            onClick={() => toggleCategory("type_trick")}
-            style={{
-              cursor: "pointer",
-              color: selectedCategory.includes("type_trick") ? "brown" : "",
-            }}
-          >
-            仕掛け絵本
-          </li>
+          ))}
         </ul>
       </div>
       <div className={styles.btnWrap}>
         <button onClick={handleBack} disabled={currentQuestionIndex === 0}>
           戻る
         </button>
-        <button onClick={handleSearch}>
-          <p>
-            <span>見つかった絵本{filteredDatas.length}冊</span>検索
-          </p>
+        <button>
+          <Link href="/result">
+            {/* <span>見つかった絵本({bookCount}冊)</span>検索 */}
+            <span>見つかった絵本(5冊)</span>検索
+          </Link>
         </button>
         <button
           onClick={handleNext}

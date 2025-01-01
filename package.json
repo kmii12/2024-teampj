@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@swc/core": "^1.10.0",
-    "firebase": "^11.0.2",
+    "firebase": "^11.1.0",
     "mysql2": "^3.11.4",
     "next": "^15.0.4",
     "react": "^18.3.1",
