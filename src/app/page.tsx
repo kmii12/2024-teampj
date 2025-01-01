@@ -1,74 +1,77 @@
 "use client";
 import styles from "./page.module.scss";
-import Header from "./components/Header";
-import Link from "next/link";
-import { questions } from "./data/questions";
-import { collection, getDocs, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+//firebase
 import { db } from "@/firebase";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
+// console.log(db);
+
+interface PictureBook {
+  id: string;
+  title: string;
+  writer: string;
+  image: string;
+  mainCharacter: string;
+  character: string[];
+  genre: string;
+  location: string;
+  atmosphere: string[];
+}
 
 export default function Home() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 現在の質問インデックス
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]); // 選択されたオプションを管理
-  // const [bookCount, setBookCount] = useState<number>(0); // 見つかった絵本の冊数
+  //絵本データ取得する
+  const [fullDatas, setFullDatas] = useState<PictureBook[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  // const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  // const selectedCategories = ["type_story", "type_trick"];
+  const [filteredDatas, setFilteredDatas] = useState<PictureBook[]>([]); // 絞り込まれたデータ
+  const router = useRouter();
 
-  // 現在の質問データ
-  const currentQuestion = questions[currentQuestionIndex];
-
-  // Firestoreから絵本のデータを取得
-  const fetchBooks = async () => {
-    try {
-      const booksCollection = collection(db, "picturebooks");
-      const q = query(booksCollection); // クエリの条件を追加する場合
-
-      const querySnapshot = await getDocs(q);
-      const books = querySnapshot.docs.map((doc) => doc.data());
-      console.log(books); // 取得したデータをログに出力
-
-      // setBookCount(querySnapshot.size); // 絵本の冊数を保存
-    } catch (error) {
-      console.error("Firestoreからデータを取得できませんでした:", error);
-    }
-  };
-
-  console.log(db);
-
-  // ページロード時にFirestoreデータを取得
   useEffect(() => {
-    // const fetchData = async () => {
-    //   const querySnapshot = await getDocs(collection(db, "picturebooks"));
-    //   console.log(querySnapshot);
-
-    //   const data = querySnapshot.docs.map((doc) => ({
-    //     id: doc.id,
-    //     ...doc.data(),
-    //   }));
-
-    //   console.log("絵本データ:", data);
-    // };
-    // fetchData();
-    fetchBooks();
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, "picturebooks"));
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as PictureBook[];
+      console.log("絵本データ", data);
+      setFullDatas(data);
+    };
+    fetchData();
   }, []);
 
-  // オプション選択時の処理
-  const handleOptionSelect = (value: string) => {
-    const updatedOptions = [...selectedOptions];
-    updatedOptions[currentQuestionIndex] = value;
-    setSelectedOptions(updatedOptions);
-  };
+  useEffect(() => {
+    //カテゴリ選択と合わせてデータを絞り込む
+    if (selectedCategory) {
+      const filtered = fullDatas.filter(
+        (item) => item.category === selectedCategory
+      );
+      console.log("選択したcategoryに一致するデータ", filtered);
+      setFilteredDatas(filtered);
+    }
+  }, [fullDatas, selectedCategory]);
 
-  // 次の質問へ進む
-  const handleNext = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+  const handleSearch = () => {
+    //カテゴリでフィルタリング(検索押すときに)
+
+    if (selectedCategory) {
+      const queryParam = encodeURIComponent(JSON.stringify(filteredDatas));
+      router.push(`/result?data=${queryParam}`);
+    } else {
+      console.log("選択されたデータがありません");
     }
   };
 
-  // 前の質問に戻る
-  const handleBack = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
-    }
+  //一つのみ選択可能
+  //このエラー無視でも動く！一旦 nullの場合仮定してないからかなー
+  //めんどいので後回し
+  const toggleCategory = (category: string) => {
+    setSelectedCategory((prevCategory) =>
+      prevCategory === category ? null : category
+    );
   };
 
   return (
@@ -82,30 +85,43 @@ export default function Home() {
       </div>
       <div className={styles.answerWrap}>
         <ul>
-          {currentQuestion.options.map((option) => (
-            <li
-              key={option.value}
-              onClick={() => handleOptionSelect(option.value)}
-              className={
-                selectedOptions[currentQuestionIndex] === option.value
-                  ? styles.selected
-                  : ""
-              }
-            >
-              {option.label}
+          {/* {fullDatas.map((full) => (
+            <li key={full.id} onClick={() => toggleCategory(full.category)}>
+              {}
             </li>
-          ))}
+          ))} */}
+
+          <li
+            value="type_story"
+            onClick={() => toggleCategory("type_story")}
+            style={{
+              cursor: "pointer",
+              color: selectedCategory.includes("type_story") ? "brown" : "",
+            }}
+          >
+            物語メイン
+          </li>
+
+          <li
+            value="type_trick"
+            onClick={() => toggleCategory("type_trick")}
+            style={{
+              cursor: "pointer",
+              color: selectedCategory.includes("type_trick") ? "brown" : "",
+            }}
+          >
+            仕掛け絵本
+          </li>
         </ul>
       </div>
       <div className={styles.btnWrap}>
         <button onClick={handleBack} disabled={currentQuestionIndex === 0}>
           戻る
         </button>
-        <button>
-          <Link href="/result">
-            {/* <span>見つかった絵本({bookCount}冊)</span>検索 */}
-            <span>見つかった絵本(5冊)</span>検索
-          </Link>
+        <button onClick={handleSearch}>
+          <p>
+            <span>見つかった絵本{filteredDatas.length}冊</span>検索
+          </p>
         </button>
         <button
           onClick={handleNext}
