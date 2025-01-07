@@ -323,7 +323,7 @@ export default function Home() {
               color: selectedCategory.includes("type_trick") ? "brown" : "",
             }}
           >
-            仕掛け絵本mmm
+            仕掛け絵本
           </li>
         </ul>
       </div>
