@@ -4,6 +4,7 @@ import styles from "./Search.module.scss";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // import類：画像
 import back from "../../../public/img/back_question.svg";
@@ -88,7 +89,7 @@ export default function Search() {
     setSelectedOptions(updatedOptions);
   };
 
-  // //絵本データ取得する
+  // 絵本データ取得
   const [fullDatas, setFullDatas] = useState<PictureBook[]>([]);
   const [filteredDatas, setFilteredDatas] = useState<PictureBook[]>([]); // 絞り込まれたデータ
 
@@ -105,6 +106,7 @@ export default function Search() {
     fetchData();
   }, []);
 
+  // 絞り込みロジック
   useEffect(() => {
     // 選択されたオプションに基づいてデータを絞り込む
     if (selectedOptions.length > 0) {
@@ -119,6 +121,17 @@ export default function Search() {
       setFilteredDatas(fullDatas); // デフォルトですべて表示
     }
   }, [selectedOptions, fullDatas]);
+
+  //
+  const router = useRouter();
+  const handleSearch = () => {
+    if (filteredDatas.length > 0) {
+      const queryParam = encodeURIComponent(JSON.stringify(filteredDatas));
+      router.push(`/search/result?data=${queryParam}`);
+    } else {
+      console.log("選択されたデータがありません");
+    }
+  };
 
   return (
     <>
@@ -158,7 +171,7 @@ export default function Search() {
         <button onClick={handleBack} disabled={currentQuestionIndex === 0}>
           <Image src={back} alt="前の質問に戻る" />
         </button>
-        <button className={styles.searchBtn}>
+        <button className={styles.searchBtn} onClick={handleSearch}>
           <p>
             見つかった絵本
             <br />(<span>{filteredDatas.length}</span>冊)
