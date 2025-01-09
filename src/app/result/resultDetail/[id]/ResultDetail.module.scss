@@ -27,7 +27,7 @@
   .itemDescriptionWrap {
     width: 180px;
     h1 {
-      border-bottom: 1.5px solid $text;
+      border-bottom: 1.5px solid $main;
       width: fit-content;
       .smallLabel {
         font-size: 1.4rem;
@@ -68,7 +68,7 @@
     width: 104px;
     height: 44px;
     border-radius: 10px;
-    background-color: $sub;
+    background-color: $main;
     font-size: 1.7rem;
     color: #fff;
     display: flex;

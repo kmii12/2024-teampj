@@ -34,9 +34,6 @@ export default function Result() {
   return (
     <>
       <Header />
-      <div className={styles.searchBarWrap}>
-        <SearchBar />
-      </div>
       <main className={styles.resultContainer}>
         <h2 className={styles.resultTitle}>
           検索結果({filteredDatas.length}件)

@@ -1,11 +1,7 @@
 @import "../styles/variables.scss";
 
-.searchBarWrap {
-  margin: 0 30px;
-}
-
 .resultContainer {
-  color: $text;
+  color: $main;
   margin: 44px 0 120px 0; //resultPage全ての上下の余白
 
   .resultTitle {

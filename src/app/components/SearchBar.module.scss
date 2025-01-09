@@ -10,13 +10,13 @@
   .searchBar {
     width: 100%;
     font-size: 1.6rem;
-    background-color: $white;
+    background-color: $base;
     padding: 0.8rem 4rem 0.8rem 0.8rem;
     border-radius: 10px;
-    box-shadow: 0px 2px 2px 0px $text inset;
-    color: $text;
+    box-shadow: 0px 2px 2px 0px $main inset;
+    color: $main;
     &::placeholder {
-      color: $text;
+      color: $main;
     }
   }
   .clearBtn {
