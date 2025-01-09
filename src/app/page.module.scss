@@ -1,8 +1,78 @@
 @import "./styles/variables.scss";
 
+// .main {
+//   width: 88%;
+//   margin: 0 auto;
+// }
+
+// .selectList {
+//   max-height: 50dvh;
+//   overflow: scroll;
+// }
+
+// .keywordWrap {
+//   display: flex;
+//   justify-content: center;
+//   padding-bottom: 2rem;
+//   div {
+//     width: 100%;
+//     h2 {
+//       font-size: 1.2rem;
+//       color: $text;
+//     }
+//     ul {
+//       margin-top: 0.8rem;
+//       display: flex;
+//       flex-wrap: wrap;
+//       gap: 1rem;
+//       li {
+//         font-size: 1.6rem;
+//         color: $text;
+//         background-color: $white;
+//         padding: 0.2rem 1rem;
+//         border-radius: 16px;
+//         border: 1.5px solid $sub;
+//         &.selected {
+//           background-color: $sub;
+//           color: $white;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// .btnWrap {
+//   // width: 100%;
+//   padding: 3.2rem 0;
+//   display: flex;
+//   justify-content: space-between;
+//   font-size: 2rem;
+//   font-weight: bold;
+//   .resetBtn {
+//     width: calc(100% / 3);
+//     background-color: $white;
+//     padding: 0.6rem 0;
+//     color: $accent;
+//     border: 2px solid $accent;
+//     border-radius: 8px;
+//     // filter: drop-shadow(0px 1px 1px #457078);
+//   }
+//   .searchBtn {
+//     width: calc(100% / 3 * 2 - 1.6rem);
+//     color: $white;
+//     background-color: $accent;
+//     padding: 0.6rem 0;
+//     border-radius: 8px;
+//     display: flex;
+//     justify-content: center;
+
+//     // filter: drop-shadow(0px 1px 1px #457078);
+//   }
+// }
+
 .questionWrap {
   padding: 0 2.4rem;
-  margin-top: 1.6rem;
+  margin-top: 3.2rem;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -11,7 +81,7 @@
     position: relative;
     display: inline-block;
     padding: 16px 8px;
-    border: 2px solid $text;
+    border: 1.5px solid $text;
     border-radius: 4px;
     background-color: $white;
     text-align: left;
@@ -79,32 +149,32 @@
 }
 
 .btnWrap {
-  width: 100%;
+  padding: 0 1.6rem;
   position: fixed;
-  bottom: 16dvh;
+  bottom: 18dvh;
   display: flex;
-  justify-content: space-evenly;
   column-gap: 0.8rem;
-  align-items: end;
   button {
-    padding: 0.2rem 1.6rem;
+    padding: 0.8rem 2rem;
     border: 2px solid $text;
     background-color: $white;
     border-radius: 8px;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: $text;
     &:nth-child(2) {
       padding: 0.8rem 1.2rem;
       background-color: $text;
-      a {
+      p {
         color: $white;
         span {
           font-size: 1.2rem;
           margin-right: 0.4rem;
         }
       }
+    }
+    p {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: $text;
     }
   }
 }
