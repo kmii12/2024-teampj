@@ -63,7 +63,7 @@ export default function Search() {
 
     if (selectedCategory) {
       const queryParam = encodeURIComponent(JSON.stringify(filteredDatas));
-      router.push(`/result?data=${queryParam}`);
+      router.push(`/search/result?data=${queryParam}`);
     } else {
       console.log("選択されたデータがありません");
     }

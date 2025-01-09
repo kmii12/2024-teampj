@@ -1,4 +1,4 @@
-@import "../styles/variables.scss";
+@import "../../styles/variables.scss";
 
 .resultContainer {
   color: $main;
@@ -38,7 +38,7 @@
     width: 318px;
     height: 194px;
     margin: 15px 0;
-    background-image: url(../../../public/img/book_bg.png);
+    background-image: url(/img/book_bg.svg);
     background-size: contain;
     background-position: center;
 
@@ -62,7 +62,7 @@
         height: 120px;
         padding-left: 10px;
         // border-style: none;
-        background-image: url(../../../public/img/hanselAndGretel.jpeg);
+        background-image: url(/img/hanselAndGretel.jpeg);
         // border: none;
         background-size: contain;
         background-position: center;
@@ -73,7 +73,7 @@
         height: 120px;
         padding-left: 10px;
         // border-style: none;
-        background-image: url(../../../public/img/hanselAndGretel.jpeg);
+        background-image: url(/img/hanselAndGretel.jpeg);
         // border: none;
         background-size: contain;
 
