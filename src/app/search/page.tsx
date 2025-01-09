@@ -8,6 +8,10 @@ import Image from "next/image";
 // import類：画像
 import back from "../../../public/img/back_question.svg";
 import next from "../../../public/img/next_question.svg";
+import reset from "../../../public/img/reset_answer.svg";
+import searcharacter from "../../../public/img/character_1.svg";
+import searcharacter_mindBlow from "../../../public/img/character_2.svg";
+import searcharacter_thinking from "../../../public/img/character_3.svg";
 
 // import類：質問リスト
 import { questions } from "../data/questions";
@@ -28,15 +32,55 @@ interface PictureBook {
   category: string[];
 }
 
+const images = [searcharacter, searcharacter_mindBlow, searcharacter_thinking];
+
 export default function Search() {
-  // 質問リスト
-  // 回答選択・質問進む戻る
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 現在の質問インデックス
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]); // 選択されたオプションを管理
+  // キャラクターの画像
+  // 質問進む・戻るの処理の状態はそのまま
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   // 現在の質問データ
   const currentQuestion = questions[currentQuestionIndex];
 
+  // 画像の状態を管理（初期値としてランダムに画像を設定）
+  const [currentImage, setCurrentImage] = useState<Image | null>(null);
+
+  // 画像をランダムに選ぶ関数
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    setCurrentImage(images[randomIndex]);
+  };
+
+  // 質問進む
+  const handleNext = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      getRandomImage(); // 次の質問に進むたびに画像をランダムに変更
+    }
+  };
+
+  // 質問戻る
+  const handleBack = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+      getRandomImage(); // 前の質問に戻るたびに画像をランダムに変更
+    }
+  };
+
+  // 初回レンダリング時にもランダム画像を設定
+  useEffect(() => {
+    getRandomImage();
+  }, []);
+
+  // リセットボタン
+  const handleReset = () => {
+    setCurrentQuestionIndex(0); // 質問を最初に戻す
+    setSelectedOptions([]); // 選択されたオプションをリセット
+    getRandomImage(); // 画像もリセット
+  };
+
+  // ?
   // オプション選択時の処理
   const handleOptionSelect = (value: string) => {
     const updatedOptions = [...selectedOptions];
@@ -44,24 +88,8 @@ export default function Search() {
     setSelectedOptions(updatedOptions);
   };
 
-  // 次の質問へ進む
-  const handleNext = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
-  };
-
-  // 前の質問に戻る
-  const handleBack = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
-    }
-  };
-
   // //絵本データ取得する
   const [fullDatas, setFullDatas] = useState<PictureBook[]>([]);
-  // const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-  // const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [filteredDatas, setFilteredDatas] = useState<PictureBook[]>([]); // 絞り込まれたデータ
 
   useEffect(() => {
@@ -96,10 +124,18 @@ export default function Search() {
     <>
       <Header />
       <div className={styles.questionWrap}>
-        <div className={styles.question}>
-          <p>{currentQuestion.question}</p>
+        <div className={styles.questionTop}>
+          <div className={styles.question}>
+            <p>{currentQuestion.question}</p>
+          </div>
+          <button onClick={handleReset}>
+            <Image src={reset} alt="リセットボタン" />
+            <p>リセット</p>
+          </button>
         </div>
-        <div className={styles.character}></div>
+        <div className={styles.character}>
+          {currentImage && <Image src={currentImage} alt="探すよ君の状態" />}
+        </div>
       </div>
       <div className={styles.answerWrap}>
         <ul>

@@ -5,11 +5,11 @@ export const questions = [
     question: "Q1.絵本のタイプを選んでください",
     options: [
       { label: "シンプルな物語", value: "type_story" },
-      { label: "形が特殊な絵本", value: "type_shape" },
-      { label: "間違い探し", value: "type_puzzle" },
-      { label: "布の絵本", value: "type_cloth" },
-      { label: "仕掛け絵本", value: "type_trick" },
+      { label: "形が特殊", value: "type_shape" },
       { label: "迷路", value: "type_maze" },
+      { label: "間違い探し", value: "type_puzzle" },
+      { label: "布", value: "type_cloth" },
+      { label: "仕掛け", value: "type_trick" },
     ],
   },
   {
@@ -22,7 +22,7 @@ export const questions = [
   },
   {
     id: 3,
-    question: "Q3.主人公の特徴は?",
+    question: "Q3.主人公の分類は?",
     options: [
       { label: "人間", value: "main_human" },
       { label: "陸の動物", value: "main_animal" },
