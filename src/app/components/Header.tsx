@@ -17,7 +17,6 @@ const header = {
   paddingTop: "4dvh",
   paddingBottom: "4dvh",
   textAlign: "center" as const,
-  // border: "1px solid #ccc",
 };
 
 const title = {
