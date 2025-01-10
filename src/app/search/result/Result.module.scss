@@ -3,27 +3,25 @@
 .resultContainer {
   color: $main;
   margin: 44px 0 120px 0; //resultPage全ての上下の余白
-
-  .resultTitle {
-    //検索結果
+  .resultHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: relative;
-    text-align: center;
-    font-size: 1.4em;
-    margin-bottom: 30px;
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      width: 35%;
-      height: 1.5px;
-      background-color: #b9a6a6;
+    img {
+      object-fit: cover;
     }
-    &::before {
-      left: 0;
-    }
-    &::after {
-      right: 0;
+    .resultTitle {
+      width: 90%;
+      font-size: 2.4em;
+      margin-bottom: 30px;
+      padding: 0.8rem 1.6rem;
+      background-color: $white;
+      border-radius: 1.6rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transform: translateY(-25%);
     }
   }
 
@@ -69,7 +67,6 @@
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: right;
         }
       }
     }

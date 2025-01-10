@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "./Result.module.scss";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
+import character from "../../../../public/img/character_result.svg";
 
 //firesbase
 // import { db } from "@/firebase";
@@ -33,9 +34,12 @@ export default function Result() {
   return (
     <>
       <main className={styles.resultContainer}>
-        <h2 className={styles.resultTitle}>
-          検索結果({filteredDatas.length}件)
-        </h2>
+        <div className={styles.resultHeader}>
+          <Image src={character} alt="キャラクター" />
+          <h2 className={styles.resultTitle}>
+            検索結果は{filteredDatas.length}件です!
+          </h2>
+        </div>
         <ul className={styles.resultList}>
           <div className={styles.resultItemWrap}>
             {filteredDatas.map((result) => (

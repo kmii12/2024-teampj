@@ -10,6 +10,7 @@ export const questions = [
       { label: "間違い探し", value: "type_puzzle" },
       { label: "布", value: "type_cloth" },
       { label: "仕掛け", value: "type_trick" },
+      { label: "その他", value: "type_other" },
     ],
   },
   {
