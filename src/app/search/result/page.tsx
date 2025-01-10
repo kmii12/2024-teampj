@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import styles from "./Result.module.scss";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import character from "../../../../public/img/character_result.svg";
+import { useEffect } from "react";
 
 //firesbase
 // import { db } from "@/firebase";
@@ -37,14 +37,22 @@ export default function Result() {
         <div className={styles.resultHeader}>
           <Image src={character} alt="キャラクター" />
           <h2 className={styles.resultTitle}>
-            検索結果は{filteredDatas.length}件です!
+            検索結果は<span>{filteredDatas.length}</span>件です!
           </h2>
         </div>
+
         <ul className={styles.resultList}>
           <div className={styles.resultItemWrap}>
             {filteredDatas.map((result) => (
               <li key={result.id} className={styles.resultItem}>
-                <Link href={`/result/resultDetail/${result.id}`}>
+                <button
+                  className={styles.resultButton}
+                  onClick={() =>
+                    (window.location.href = `/search/result/resultDetail?id=${encodeURIComponent(
+                      result.id
+                    )}`)
+                  }
+                >
                   <div className={styles.resultItemWrap}>
                     <div className={styles.itemImageWrap}>
                       <div className={styles.imgWrap}>
@@ -66,7 +74,7 @@ export default function Result() {
                       </div>
                     </div>
                   </div>
-                </Link>
+                </button>
               </li>
             ))}
           </div>

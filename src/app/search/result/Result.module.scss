@@ -2,26 +2,34 @@
 
 .resultContainer {
   color: $main;
-  margin: 44px 0 120px 0; //resultPage全ての上下の余白
+  margin: 0 0 16dvh; //resultPage全ての上下の余白
   .resultHeader {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding-top: 4dvh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    position: relative;
+    background-color: $base;
     img {
       object-fit: cover;
     }
     .resultTitle {
       width: 90%;
-      font-size: 2.4em;
-      margin-bottom: 30px;
-      padding: 0.8rem 1.6rem;
+      font-size: 2rem;
+      padding: 0.2rem 1.6rem;
       background-color: $white;
       border-radius: 1.6rem;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       text-align: center;
       transform: translateY(-25%);
+      span {
+        font-size: 2.4em;
+        padding: 0 0.8rem;
+      }
     }
   }
 
@@ -29,6 +37,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 28dvh;
   }
 
   .resultItem {

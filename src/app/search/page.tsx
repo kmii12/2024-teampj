@@ -167,6 +167,7 @@ export default function Search() {
           ))}
         </ul>
       </div>
+
       <div className={styles.btnWrap}>
         <button onClick={handleBack} disabled={currentQuestionIndex === 0}>
           <Image src={back} alt="前の質問に戻る" />
