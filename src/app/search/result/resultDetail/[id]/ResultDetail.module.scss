@@ -1,82 +1,103 @@
 @import "../../../../styles/variables.scss";
 
-// .detailTtlWrap {
-//   padding: 26px 14px;
-//   margin: 18px;
-//   width: 360px;
-//   height: 188px;
-//   position: relative;
-//   //Flexで画像と説明を横並びにするためのWrap
-//   display: flex;
-//   gap: 18px;
-//   .itemImageWrap {
-//     width: 170px;
-//     height: 162px;
-//     display: flex;
-//     // align-items: center;
-//     // justify-content: center;
+.detailContainer {
+  margin: 8dvh 6dvw 0;
+  color: $main;
+}
 
-//     .image {
-//       width: 100%;
-//       height: auto;
+.backBtnWrap {
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.4rem;
+    font-size: 1.6em;
+    font-weight: 600;
+    color: $main;
+    img {
+      object-fit: cover;
+    }
+  }
+}
 
-//       object-fit: cover;
-//     }
-//   }
+.detailWrap {
+  //li
+  width: 88dvw;
+  height: 32dvh;
+  margin: 0 auto;
+  background-size: contain;
+  background-position: center;
+  background-image: url(/img/book_bg_pink.svg);
+  display: flex;
+  .leftWrap {
+    width: 44dvw;
+    height: 32dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .imgWrap {
+      width: 38dvw;
+      aspect-ratio: 1/1;
+      transform: translateX(2.5%);
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .rightWrap {
+    width: 44dvw;
+    height: 32dvh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 4dvh 0 8dvh;
+    h1 {
+      //本の題名
+      width: 16ch;
+      overflow: hidden;
+      white-space: wrap;
+      text-align: start;
+      font-size: 1.6em;
+      margin: 3.2rem 0 0.8rem;
+    }
+    ul {
+      text-align: start;
+      li {
+        width: 16ch;
+        font-size: 1.2rem;
+        overflow: hidden;
+        white-space: wrap;
+      }
+    }
+  }
+}
 
-//   .itemDescriptionWrap {
-//     width: 180px;
-//     h1 {
-//       border-bottom: 1.5px solid $main;
-//       width: fit-content;
-//       .smallLabel {
-//         font-size: 1.4rem;
-//         font-weight: normal;
-//       }
-//     }
-//     .fixedBottom {
-//       position: absolute;
-//       bottom: 0px;
-//       left: 190px;
-//       p {
-//         font-size: 1.4rem;
-//         margin: 10px 0;
-//       }
-//     }
-//   }
-// }
+.summaryTtl {
+  font-size: 2rem;
+  margin: 0 0 1.6rem;
+}
 
-// .descriptionContainer {
-//   //あらすじ
+.summary {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
 
-//   margin: 35px 25px 52px 25px;
-
-//   .summary {
-//     font-size: 1.8rem;
-//     margin-bottom: 25px;
-//   }
-//   .summaryTxt {
-//     font-size: 1.3rem;
-//     line-height: 25px;
-//   }
-// }
-
-// .btnWrap {
-//   display: flex;
-//   justify-content: center;
-//   .storageBtn {
-//     width: 104px;
-//     height: 44px;
-//     border-radius: 10px;
-//     background-color: $main;
-//     font-size: 1.7rem;
-//     color: #fff;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     padding-bottom: 6px;
-//     &:hover {
-//       background-color: $accent;
-//     }
-//   }
-// }
+.keepBtnWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .keepBtn {
+    font-size: 1.6rem;
+    font-weight: 500;
+    background-color: $accent;
+    color: $base;
+    border-radius: 0.8rem;
+    padding: 0.8rem 3.2rem;
+    position: absolute;
+    bottom: 20dvh;
+  }
+}

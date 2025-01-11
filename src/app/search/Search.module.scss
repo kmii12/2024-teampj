@@ -79,19 +79,15 @@
       color: $main;
       background-color: $white;
       padding: 0.4rem 1.6rem;
+      border-color: $sub_pink;
       border-radius: 2.4rem;
       border-width: 2.5px;
       border-style: solid;
       cursor: pointer;
       &.selected {
+        background-color: $sub_pink;
         color: $white;
         font-weight: 500;
-      }
-      &:nth-of-type(n) {
-        border-color: $sub_pink;
-        &.selected {
-          background-color: $sub_pink;
-        }
       }
       &:nth-of-type(2n) {
         border-color: $sub_yellow;

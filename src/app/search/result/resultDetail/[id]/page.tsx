@@ -1,14 +1,14 @@
 "use client";
 
-import styles from "./ResultDetail.module.scss";
-
-// Firebase
+import { useEffect, useState } from "react";
+import { useRouter, useParams } from "next/navigation";
 import Image from "next/image";
+import styles from "./ResultDetail.module.scss";
+import back from "../../../../../../public/img/backPage.svg";
 
-interface resultData {
-  id: string;
+interface PictureBook {
+  id: number;
   title: string;
-  writer: string;
   mainCharacter: string;
   character: string[];
   genre: string;
@@ -16,80 +16,80 @@ interface resultData {
   img: string;
   category: string[];
   summary: string;
+  // idページにだけ使用
+  writer: string;
+  illustrator: string;
 }
 
-const ResultDetail = () => {
-  // const searchParams = useSearchParams();
-  // const id = searchParams.get("id"); // URLパラメータからidを取得
+export default function ResultDetail() {
+  const router = useRouter();
+  const params = useParams(); // `params` を取得
+  const [detail, setDetail] = useState<PictureBook | null>(null); // データを状態として管理
+  const [error, setError] = useState<string | null>(null);
 
-  // const [resultDetails, setResultDetails] = useState<ResultData | null>(null); // 本のデータを保存するstate
+  useEffect(() => {
+    // クライアント側で `sessionStorage` からデータを取得
+    if (params && params.id) {
+      const data = sessionStorage.getItem("filteredData");
+      if (data) {
+        const pictureBooks: PictureBook[] = JSON.parse(data);
+        const id = Number(params.id);
+        const foundDetail = pictureBooks.find((item) => item.id === id);
 
-  // useEffect(() => {
-  //   const fetchPictureBook = async () => {
-  //     if (!id) return;
-  //     const docRef = doc(db, "picturebooks", id);
-  //     const docSnap = await getDoc(docRef);
-  //     if (docSnap.exists()) {
-  //       setResultDetails({ id: docSnap.id, ...docSnap.data() } as ResultData);
-  //     } else {
-  //       console.log("No such document!");
-  //     }
-  //   };
-  //   fetchPictureBook();
-  // }, [id]);
+        if (foundDetail) {
+          setDetail(foundDetail);
+        } else {
+          setError("データが見つかりませんでした。");
+        }
+      } else {
+        setError("データが見つかりませんでした。");
+      }
+    } else {
+      setError("無効なIDが指定されました。");
+    }
+  }, [params]);
 
-  // useEffect(() => {
-  //   console.log("Search Params ID:", id); // デバッグ用
-  // }, [id]);
+  if (error) {
+    return <p>{error}</p>;
+  }
 
-  // if (!resultDetails) {
-  //   return <p>Loading...</p>;
-  // }
+  if (!detail) {
+    return <p>データを読み込んでいます...</p>; // ローディング状態を表示
+  }
 
   return (
-    <div className={styles.resultContainer}>
-      <div className={styles.detailTtlWrap}>
-        <div className={styles.itemImageWrap}>
-          <Image
-            src={resultData.img}
-            alt={resultData.title}
-            width={200}
-            height={200}
-            className={styles.image}
-          />
-        </div>
-        <div className={styles.itemDescriptionWrap}>
-          <h1 className={styles.detailTtl}>
-            <span className={styles.smallLabel}>題名</span>
-            {resultData.title}
-          </h1>
-          <div className={styles.fixedBottom}>
-            <p className="writer">作者：{resultData.writer}</p>
-            <p className="illustrator">絵：{resultData.illustrator}</p>
-            <p className="company">出版社：{resultData.company}</p>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.descriptionContainer}>
-        <h2 className={styles.summary}>あらすじ</h2>
-        <p className={styles.summaryTxt}>
-          むかしむかし、ある国に、シンデレラという
-          女の子がいました。やさしいお父さんが亡くなり、
-          シンデレラは、いじわるなまま母とふたりの姉に
-          こき使われる毎日を過ごしていました。
-          そんなある日、妖精のおばあさんがあらわれ、
-          シンデレラはあこがれの舞踏会へ行くことになり……
-        </p>
-      </div>
-
-      <div className={styles.btnWrap}>
-        <button type="button" className={styles.storageBtn}>
-          保存
+    <main className={styles.detailContainer}>
+      <div className={styles.backBtnWrap}>
+        <button onClick={() => router.back()}>
+          <Image src={back} alt="前のページに戻る" />
+          戻る
         </button>
       </div>
-    </div>
-  );
-};
+      <div className={styles.detailWrap}>
+        <div className={styles.leftWrap}>
+          <div className={styles.imgWrap}>
+            <Image
+              src={detail.img}
+              alt={detail.title}
+              width={200}
+              height={130}
+            />
+          </div>
+        </div>
+        <div className={styles.rightWrap}>
+          <h1>{detail.title}</h1>
+          <ul>
+            <li>作者：{detail.writer}</li>
+            <li>絵：{detail.illustrator}</li>
+          </ul>
+        </div>
+      </div>
 
-export default ResultDetail;
+      <h2 className={styles.summaryTtl}>あらすじ</h2>
+      <p className={styles.summary}>{detail.summary}</p>
+      <div className={styles.keepBtnWrap}>
+        <button className={styles.keepBtn}>保存</button>
+      </div>
+    </main>
+  );
+}

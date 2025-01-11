@@ -126,8 +126,10 @@ export default function Search() {
   const router = useRouter();
   const handleSearch = () => {
     if (filteredDatas.length > 0) {
-      const queryParam = encodeURIComponent(JSON.stringify(filteredDatas));
-      router.push(`/search/result?data=${queryParam}`);
+      // 絞り込まれたデータを sessionStorage に保存
+      sessionStorage.setItem("filteredData", JSON.stringify(filteredDatas));
+      // URL にデータを含めず遷移
+      router.push(`/search/result`);
     } else {
       console.log("選択されたデータがありません");
     }
