@@ -1,0 +1,115 @@
+@import "../../styles/variables.scss";
+
+.resultContainer {
+  color: $main;
+  margin: 0 0 16dvh; //resultPage全ての上下の余白
+  .resultHeader {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding-top: 4dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: $base;
+    img {
+      object-fit: cover;
+    }
+    .resultTitle {
+      width: 90%;
+      font-size: 2rem;
+      padding: 0.2rem 1.6rem;
+      background-color: $white;
+      border-radius: 1.6rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transform: translateY(-25%);
+      span {
+        font-size: 2.4em;
+        padding: 0 0.8rem;
+      }
+    }
+  }
+
+  .resultList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 28dvh;
+  }
+
+  .resultItem {
+    //li
+    width: 318px;
+    height: 194px;
+    margin: 15px 0;
+    background-size: contain;
+    background-position: center;
+    background-image: url(/img/book_bg_pink.svg);
+    position: relative;
+    &:nth-last-of-type(2n) {
+      background-image: url(/img/book_bg_yellow.svg);
+    }
+    &:nth-last-of-type(3n) {
+      background-image: url(/img/book_bg_blue.svg);
+    }
+    .resultItemWrap {
+      //Flexで画像と説明を横並びにするためのWrap
+      display: flex;
+    }
+    .itemImageWrap {
+      width: 160px;
+      height: 194px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .imgWrap {
+        width: 120px;
+        height: 120px;
+        padding-left: 10px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+    .itemDescriptionWrap {
+      width: 15rem;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      color: $main;
+      h3 {
+        //本の題名
+        width: 16ch;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 1.6em;
+        margin: 3.2rem 0 0.8rem;
+      }
+      .summaryContainer {
+        width: 24ch;
+        height: 8.8rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: collapse;
+        text-decoration: underline #9e9e9e;
+        text-underline-offset: 0.2rem;
+        font-size: 1em;
+        text-align: start;
+        h4 {
+          font-weight: 600;
+        }
+        p {
+          letter-spacing: 0.16em;
+        }
+      }
+    }
+  }
+}

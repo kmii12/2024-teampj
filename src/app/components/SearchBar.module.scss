@@ -1,0 +1,31 @@
+@import "../styles/variables.scss";
+
+.searchBarWrap {
+  width: 100%;
+  padding: 0 2.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  .searchBar {
+    width: 100%;
+    font-size: 1.6rem;
+    background-color: $base;
+    padding: 0.8rem 4rem 0.8rem 0.8rem;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px 0px $main inset;
+    color: $main;
+    &::placeholder {
+      color: $main;
+    }
+  }
+  .clearBtn {
+    position: absolute;
+    top: 50%;
+    right: 3.2rem;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

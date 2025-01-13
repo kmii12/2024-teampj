@@ -1,0 +1,139 @@
+@import "../styles/variables.scss";
+
+.questionWrap {
+  padding: 0 2.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.6rem;
+  .questionTop {
+    display: flex;
+    justify-content: space-between;
+    .question {
+      position: relative;
+      display: inline-block;
+      padding: 1.6rem 0.8rem;
+      border: 2.5px solid $sub_yellow;
+      border-radius: 0.8rem;
+      background-color: $white;
+      text-align: left;
+      font-size: 1.6rem;
+      font-weight: 600;
+      line-height: 1.5;
+      color: $main;
+      align-self: flex-start;
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 32%;
+        border-style: solid;
+        border-width: 1.6rem 0 0 2.4rem;
+        border-color: $sub_yellow transparent transparent;
+        translate: -50% 100%;
+        transform: skew(11deg);
+        transform-origin: top;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 32%;
+        border-style: solid;
+        border-width: 1rem 0 0 1.6rem;
+        border-color: $white transparent transparent;
+        translate: calc(-50% + 0.06rem) 100%;
+        transform: skew(11deg);
+        transform-origin: top;
+      }
+    }
+    button {
+      p {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: $main;
+      }
+    }
+  }
+  .character {
+    align-self: flex-end;
+    width: 24rem;
+    height: 18rem;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.answerWrap {
+  padding: 6dvh 3.2rem 0;
+  ul {
+    margin-top: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    row-gap: 1.2rem;
+    column-gap: 0.8rem;
+    li {
+      font-size: 2rem;
+      font-weight: 400;
+      color: $main;
+      background-color: $white;
+      padding: 0.4rem 1.6rem;
+      border-color: $sub_pink;
+      border-radius: 2.4rem;
+      border-width: 2.5px;
+      border-style: solid;
+      cursor: pointer;
+      &.selected {
+        background-color: $sub_pink;
+        color: $white;
+        font-weight: 500;
+      }
+      &:nth-of-type(2n) {
+        border-color: $sub_yellow;
+        &.selected {
+          background-color: $sub_yellow;
+        }
+      }
+      &:nth-of-type(3n) {
+        border-color: $sub_blue;
+        &.selected {
+          background-color: $sub_blue;
+        }
+      }
+    }
+  }
+}
+
+.btnWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  column-gap: 1.6rem;
+  position: fixed;
+  bottom: 16vh;
+  .searchBtn {
+    width: auto;
+    background-color: $main;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.8rem;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.25);
+    p {
+      padding: 0.4rem 2.4rem;
+      color: $white;
+      border-right: 2px dotted #ac8d7e;
+      font-size: 1.2rem;
+      span {
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+      &:last-child {
+        font-size: 2rem;
+        font-weight: 500;
+        border-right: none;
+      }
+    }
+  }
+}
