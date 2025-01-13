@@ -15,30 +15,30 @@
 //   }
 // }
 
-import mysql from "mysql2/promise";
+// import mysql from "mysql2/promise";
 
-export async function GET(req) {
-  try {
-    // mysql db接続
-    const connection = await mysql.createConnection({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-    });
+// export async function GET(req) {
+//   try {
+//     // mysql db接続
+//     const connection = await mysql.createConnection({
+//       host: process.env.DB_HOST,
+//       user: process.env.DB_USER,
+//       password: process.env.DB_PASSWORD,
+//       database: process.env.DB_NAME,
+//     });
 
-    // クエリの実行
-    const [rows] = await connection.execute("SELECT id, title FROM storyBooks");
+//     // クエリの実行
+//     const [rows] = await connection.execute("SELECT id, title FROM storyBooks");
 
-    //jsonでデータを返す
-    return new Response(JSON.stringify(rows), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (error) {
-    console.error("db接続失敗:", error);
-    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
-      status: 500,
-    });
-  }
-}
+//     //jsonでデータを返す
+//     return new Response(JSON.stringify(rows), {
+//       status: 200,
+//       headers: { "Content-Type": "application/json" },
+//     });
+//   } catch (error) {
+//     console.error("db接続失敗:", error);
+//     return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+//       status: 500,
+//     });
+//   }
+// }
