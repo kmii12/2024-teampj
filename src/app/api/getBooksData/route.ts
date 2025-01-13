@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 // import mysql from "mysql2/promise";
 
 // export async function handler(req, res) {
@@ -42,3 +44,5 @@
 //     });
 //   }
 // }
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
