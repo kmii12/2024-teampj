@@ -31,7 +31,7 @@ export const questions = [
       { label: "空の動物", value: "main_sky" },
       { label: "昆虫", value: "main_insect" },
       { label: "植物", value: "main_plant" },
-      { label: "その他", value: "main_other" },
+      { label: "その他", value: "main_othe" },
     ],
   },
 ];
