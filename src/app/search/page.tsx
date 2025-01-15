@@ -45,10 +45,7 @@ export default function Search() {
   const currentQuestion = questions[currentQuestionIndex];
 
   // 画像の状態を管理（初期値としてランダムに画像を設定）
-  const [currentImage, setCurrentImage] = useState<HTMLImageElement | null>(
-    null
-  );
-
+  const [currentImage, setCurrentImage] = useState<Image | null>(null);
   // 画像をランダムに選ぶ関数
   const getRandomImage = () => {
     const randomIndex = Math.floor(Math.random() * images.length);
