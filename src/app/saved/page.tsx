@@ -70,18 +70,20 @@ export default function SavedList() {
 
   return (
     <>
-      <Header />
+      <div className={styles.mainTitleWrap}>
+        <h1 className={styles.mainTitle}>保存</h1>
+      </div>
       <div className={styles.searchBarWrap}>
         <SearchBar />
       </div>
       <main className={styles.resultContainer}>
-        <h2 className={styles.resultTitle}>検索結果({savedDatas.length}件)</h2>
         <ul className={styles.resultList}>
           <div className={styles.resultItemWrap}>
             {savedDatas.map((savedItem) => (
               <li key={savedItem.id} className={styles.resultItem}>
                 <Link href={`/result/resultDetail/${savedItem.id}`}>
-                  <div className={styles.resultItemWrap}>
+                  <div className={styles.resultItemCard}>
+                    <h3>{savedItem.title}</h3>
                     <div className={styles.itemImageWrap}>
                       <div className={styles.imgWrap}>
                         <Image
@@ -91,14 +93,6 @@ export default function SavedList() {
                           height={200}
                           className={styles.image}
                         />
-                      </div>
-                    </div>
-
-                    <div className={styles.itemDescriptionWrap}>
-                      <h3 className="title">{savedItem.title}</h3>
-                      <div className={styles.summaryContainer}>
-                        <h4>あらすじ</h4>
-                        <p className={styles.summary}>{savedItem.summary}</p>
                       </div>
                     </div>
                   </div>
