@@ -1,180 +1,19 @@
 @import "./styles/variables.scss";
 
-// .main {
-//   width: 88%;
-//   margin: 0 auto;
-// }
-
-// .selectList {
-//   max-height: 50dvh;
-//   overflow: scroll;
-// }
-
-// .keywordWrap {
-//   display: flex;
-//   justify-content: center;
-//   padding-bottom: 2rem;
-//   div {
-//     width: 100%;
-//     h2 {
-//       font-size: 1.2rem;
-//       color: $text;
-//     }
-//     ul {
-//       margin-top: 0.8rem;
-//       display: flex;
-//       flex-wrap: wrap;
-//       gap: 1rem;
-//       li {
-//         font-size: 1.6rem;
-//         color: $text;
-//         background-color: $white;
-//         padding: 0.2rem 1rem;
-//         border-radius: 16px;
-//         border: 1.5px solid $sub;
-//         &.selected {
-//           background-color: $sub;
-//           color: $white;
-//         }
-//       }
-//     }
-//   }
-// }
-
-// .btnWrap {
-//   // width: 100%;
-//   padding: 3.2rem 0;
-//   display: flex;
-//   justify-content: space-between;
-//   font-size: 2rem;
-//   font-weight: bold;
-//   .resetBtn {
-//     width: calc(100% / 3);
-//     background-color: $white;
-//     padding: 0.6rem 0;
-//     color: $accent;
-//     border: 2px solid $accent;
-//     border-radius: 8px;
-//     // filter: drop-shadow(0px 1px 1px #457078);
-//   }
-//   .searchBtn {
-//     width: calc(100% / 3 * 2 - 1.6rem);
-//     color: $white;
-//     background-color: $accent;
-//     padding: 0.6rem 0;
-//     border-radius: 8px;
-//     display: flex;
-//     justify-content: center;
-
-//     // filter: drop-shadow(0px 1px 1px #457078);
-//   }
-// }
-
-.questionWrap {
-  padding: 0 2.4rem;
-  margin-top: 3.2rem;
+.main {
+  width: 100%;
+  height: 90dvh;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  gap: 1.6rem;
-  .question {
-    position: relative;
-    display: inline-block;
-    padding: 16px 8px;
-    border: 1.5px solid $text;
-    border-radius: 4px;
-    background-color: $white;
-    text-align: left;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.5;
-    color: $text;
-    align-self: flex-start;
-  }
-  .question::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 32%;
-    border-style: solid;
-    border-width: 16px 0 0 24px;
-    border-color: $text transparent transparent;
-    translate: -50% 100%;
-    transform: skew(11deg);
-    transform-origin: top;
-  }
-  .question::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 32%;
-    border-style: solid;
-    border-width: 13.2px 0 0 19.8px;
-    border-color: $white transparent transparent;
-    translate: calc(-50% + 0.6px) 100%;
-    transform: skew(11deg);
-    transform-origin: top;
-  }
-  .cat {
-    align-self: flex-end;
-    width: 24rem;
-    height: 18rem;
-    background-size: cover;
-    background-position: center;
-    background-image: url("../../public/img/cat.png");
-  }
-}
-
-.answerWrap {
-  padding: 2.4rem 2.4rem 0;
-  ul {
-    margin-top: 0.8rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.6rem;
-    li {
-      font-size: 1.6rem;
-      color: $text;
-      background-color: $white;
-      padding: 0.2rem 1.2rem;
-      border-radius: 16px;
-      border: 1.5px solid $sub;
-      cursor: pointer;
-      &.selected {
-        background-color: $sub;
-        color: $white;
-      }
-    }
-  }
-}
-
-.btnWrap {
-  padding: 0 1.6rem;
-  position: fixed;
-  bottom: 18dvh;
-  display: flex;
-  column-gap: 0.8rem;
-  button {
-    padding: 0.8rem 2rem;
-    border: 2px solid $text;
-    background-color: $white;
-    border-radius: 8px;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
-    &:nth-child(2) {
-      padding: 0.8rem 1.2rem;
-      background-color: $text;
-      p {
-        color: $white;
-        span {
-          font-size: 1.2rem;
-          margin-right: 0.4rem;
-        }
-      }
-    }
-    p {
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: $text;
-    }
+  justify-content: space-around;
+  align-items: center;
+  a {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: $base;
+    padding: 1.6rem 3.2rem;
+    background-color: $main;
+    border-radius: 1.6rem;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.25);
   }
 }

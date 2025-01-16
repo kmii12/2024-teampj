@@ -1,0 +1,103 @@
+@import "../../../../styles/variables.scss";
+
+.detailContainer {
+  margin: 8dvh 6dvw 0;
+  color: $main;
+}
+
+.backBtnWrap {
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.4rem;
+    font-size: 1.6em;
+    font-weight: 600;
+    color: $main;
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+.detailWrap {
+  //li
+  width: 88dvw;
+  height: 32dvh;
+  margin: 0 auto;
+  background-size: contain;
+  background-position: center;
+  background-image: url(/img/book_bg_pink.svg);
+  display: flex;
+  .leftWrap {
+    width: 44dvw;
+    height: 32dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .imgWrap {
+      width: 38dvw;
+      aspect-ratio: 1/1;
+      transform: translateX(2.5%);
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .rightWrap {
+    width: 44dvw;
+    height: 32dvh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 4dvh 0 8dvh;
+    h1 {
+      //本の題名
+      width: 16ch;
+      overflow: hidden;
+      white-space: wrap;
+      text-align: start;
+      font-size: 1.6em;
+      margin: 3.2rem 0 0.8rem;
+    }
+    ul {
+      text-align: start;
+      li {
+        width: 16ch;
+        font-size: 1.2rem;
+        overflow: hidden;
+        white-space: wrap;
+      }
+    }
+  }
+}
+
+.summaryTtl {
+  font-size: 2rem;
+  margin: 0 0 1.6rem;
+}
+
+.summary {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.keepBtnWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .keepBtn {
+    font-size: 1.6rem;
+    font-weight: 500;
+    background-color: $accent;
+    color: $base;
+    border-radius: 0.8rem;
+    padding: 0.8rem 3.2rem;
+    position: absolute;
+    bottom: 20dvh;
+  }
+}
