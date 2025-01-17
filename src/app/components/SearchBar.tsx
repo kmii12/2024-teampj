@@ -3,17 +3,17 @@ import { Dispatch, SetStateAction } from "react";
 
 interface SearchBarProps {
   searchText: string;
-  setSearchText: Dispatch<SetStateAction<string>>;
+  // setSearchText: Dispatch<SetStateAction<string>>;
 }
 
 export default function SearchBar({
   searchText,
-  setSearchText,
-}: SearchBarProps) {
+}: // setSearchText,
+SearchBarProps) {
   // const [searchText, setSearchText] = useState("");
 
   const clearBtn = () => {
-    setSearchText("");
+    // setSearchText("");
   };
 
   return (
@@ -24,7 +24,7 @@ export default function SearchBar({
         className={styles.searchBar}
         placeholder="キーワードを入れてください"
         value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
+        // onChange={(e) => setSearchText(e.target.value)}
       />
       {searchText && (
         <button onClick={clearBtn} className={styles.clearBtn}>
