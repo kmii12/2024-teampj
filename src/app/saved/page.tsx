@@ -50,7 +50,7 @@ interface PictureBook {
 
 export default function SavedList() {
   //firebaseの絵本データ
-  const [savedDatas, setSavedDates] = useState([]);
+  const [savedDatas, setSavedDates] = useState<{ id: string }[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
