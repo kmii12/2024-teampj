@@ -1,0 +1,112 @@
+@import "../styles/variables.scss";
+
+.mainTitleWrap {
+  position: relative;
+  margin: 80px 0;
+  background-color: $base;
+  z-index: 10000;
+  .mainTitle {
+    top: 0;
+    left: 0;
+    text-align: center;
+    background-color: $base;
+    width: 100vw;
+    padding: 40px 0;
+    font-size: 3em;
+    color: $main;
+    position: fixed;
+  }
+}
+
+.searchBarWrap {
+  margin: 130px 30px 0 30px;
+}
+
+.resultContainer {
+  color: $main;
+  // margin: 44px 20px 120px 20px; //resultPage全ての上下の余白
+
+  .resultList {
+    width: 360px;
+    margin: 44px auto 120px auto; //resultPage全ての上下の余白
+
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: center;
+    // align-items: center;
+    .resultItemWrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: left;
+
+      .resultItem {
+        //li
+        width: 160px;
+        height: 180px;
+        // margin: 15px 0;
+        background-color: $base;
+
+        border-radius: 15px;
+        // box-shadow: 0px 2px 2px rgba($color: #000000, $alpha: 0.25);
+
+        .resultItemCard {
+          width: 160px;
+          height: 180px;
+          border: 5px solid #c2b09a;
+          background-color: #fff;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          h3 {
+            margin-top: 10px;
+            display: block;
+            position: absolute;
+            top: -5px;
+            left: 5%;
+            right: 0;
+          }
+        }
+        .itemImageWrap {
+          height: 170px;
+          display: flex;
+          align-items: center;
+
+          .imgWrap {
+            width: 140px;
+            height: 140px;
+          }
+          .image {
+            width: 140px;
+            height: 140px;
+          }
+        }
+        .itemDescriptionWrap {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+
+          width: 150px;
+          h3 {
+            //本の題名
+            text-align: center;
+            font-size: 1.6em;
+            font-weight: normal;
+            margin: 38px 0 6px 0;
+
+            width: fit-content;
+            height: fit-content;
+            overflow: scroll;
+            // border-bottom: 1.5px solid $text;
+          }
+
+          // .fixedBottom {
+          //   position: absolute;
+          //   bottom: 25px;
+          //   left: 170px;
+          // }
+        }
+      }
+    }
+  }
+}
