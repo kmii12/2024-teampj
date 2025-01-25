@@ -65,7 +65,7 @@
 }
 
 .answerWrap {
-  padding: 6dvh 3.2rem 0;
+  padding: 0 3.2rem 0;
   ul {
     margin-top: 0.8rem;
     display: flex;
@@ -74,11 +74,11 @@
     row-gap: 1.2rem;
     column-gap: 0.8rem;
     li {
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: 400;
       color: $main;
       background-color: $white;
-      padding: 0.4rem 1.6rem;
+      padding: 0.4rem 0.8rem;
       border-color: $sub_pink;
       border-radius: 2.4rem;
       border-width: 2.5px;
@@ -111,7 +111,7 @@
   justify-content: center;
   column-gap: 1.6rem;
   position: fixed;
-  bottom: 16vh;
+  bottom: 16dvh;
   .searchBtn {
     width: auto;
     background-color: $main;
