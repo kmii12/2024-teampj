@@ -5,6 +5,7 @@ import styles from "./Read.module.scss";
 import Image from "next/image";
 import close from "../../../public/img/close.svg";
 import ReadLogin from "../components/ReadLogin";
+import Link from "next/link";
 
 const Read: React.FC = () => {
   const [isLandscape, setIsLandscape] = useState<boolean>(false);
@@ -98,13 +99,15 @@ const Read: React.FC = () => {
               {activeTab === 3 && (
                 <>
                   <li>
-                    <p>赤ずきん</p>
-                    <Image
-                      src="/img/littleRedRidingHood.jpg"
-                      alt="赤ずきんの絵本の写真"
-                      width={80}
-                      height={80}
-                    />
+                    <Link href="/read/reading">
+                      <p>赤ずきん</p>
+                      <Image
+                        src="/img/littleRedRidingHood.jpg"
+                        alt="赤ずきんの絵本の写真"
+                        width={80}
+                        height={80}
+                      />
+                    </Link>
                   </li>
                 </>
               )}
