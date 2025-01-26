@@ -4,10 +4,12 @@ import Portrait from "../components/Portrait";
 import styles from "./Read.module.scss";
 import Image from "next/image";
 import close from "../../../public/img/close.svg";
+import ReadLogin from "../components/ReadLogin";
 
 const Read: React.FC = () => {
   const [isLandscape, setIsLandscape] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<number>(1); // 1: 最初のタブ
+  const [activeTab, setActiveTab] = useState<number>(1);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // 向きの変更を監視
   useEffect(() => {
@@ -27,6 +29,9 @@ const Read: React.FC = () => {
     setActiveTab(index);
   };
 
+  const openReadLogin = () => setIsModalOpen(true);
+  const closeReadLogin = () => setIsModalOpen(false);
+
   return (
     <div>
       {isLandscape ? (
@@ -40,7 +45,7 @@ const Read: React.FC = () => {
           </div>
           <nav className={styles.tab}>
             <ul>
-              {["ももいけいこ", "ひかる", "ひかりん"].map((tab, index) => (
+              {["ももこ", "ひかる", "れいか"].map((tab, index) => (
                 <li
                   key={index}
                   className={`${
@@ -60,17 +65,17 @@ const Read: React.FC = () => {
                   <li>
                     <p>アラジン</p>
                     <Image
-                      src="/img/aladdin.jpeg"
+                      src="/img/aladdin.jpg"
                       alt="アラジンの絵本の写真"
                       width={80}
                       height={80}
                     />
                   </li>
                   <li>
-                    <p>シンデレラ</p>
+                    <p>かぐや姫</p>
                     <Image
-                      src="/img/cinderella.jpeg"
-                      alt="シンデレラの絵本の写真"
+                      src="/img/kaguyahime.jpg"
+                      alt="かぐや姫の絵本の写真"
                       width={80}
                       height={80}
                     />
@@ -80,10 +85,10 @@ const Read: React.FC = () => {
               {activeTab === 2 && (
                 <>
                   <li>
-                    <p>赤ずきん</p>
+                    <p>桃太郎</p>
                     <Image
-                      src="/img/littleRedRidingHood.jpeg"
-                      alt="赤ずきんの絵本の写真"
+                      src="/img/momotaro.jpeg"
+                      alt="桃太郎の絵本の写真"
                       width={80}
                       height={80}
                     />
@@ -93,10 +98,10 @@ const Read: React.FC = () => {
               {activeTab === 3 && (
                 <>
                   <li>
-                    <p>白雪姫</p>
+                    <p>赤ずきん</p>
                     <Image
-                      src="/img/snowwhite.jpeg"
-                      alt="白雪姫の絵本の写真"
+                      src="/img/littleRedRidingHood.jpg"
+                      alt="赤ずきんの絵本の写真"
                       width={80}
                       height={80}
                     />
@@ -105,6 +110,20 @@ const Read: React.FC = () => {
               )}
             </ul>
           </div>
+          <ReadLogin isOpen={isModalOpen} onClose={closeReadLogin}>
+            <h2>ログイン</h2>
+            <form>
+              <label>
+                ユーザー名:
+                <input type="text" />
+              </label>
+              <label>
+                パスワード:
+                <input type="password" />
+              </label>
+              <button type="submit">ログイン</button>
+            </form>
+          </ReadLogin>
         </div>
       ) : (
         // 画面縦向き
