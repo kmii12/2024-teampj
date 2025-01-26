@@ -1,10 +1,10 @@
 // tsx内でスタイルを設定するとき用
 export const color = {
-  base: "#FFF4EA",
-  main: "#FADFA1",
-  sub: "#C96868",
-  accent: "#7EACB5",
-  text: "#755D52",
-  main_pale: "#fbe8bb",
+  base: "#f7f4f3",
+  main: "#755d52",
+  accent: "#eb476d",
+  sub_pink: "#ffbecd",
+  sub_yellow: "#fae094",
+  sub_blue: "#a0daea",
   white: "#fdfdfd",
 };
