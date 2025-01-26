@@ -1,4 +1,7 @@
 @import "../styles/variables.scss";
+$red: #e96969;
+$yellow: #f2d76c;
+$green: #65e979;
 
 .container {
   width: 100%;
@@ -32,6 +35,7 @@
     width: 100%;
     height: 100%;
     display: flex;
+    align-items: end;
     li {
       width: calc(100% / 6);
       height: inherit;
@@ -42,14 +46,27 @@
       font-size: 1.6rem;
       font-weight: 500;
       color: $white;
+      transition: 0.3s;
       &:nth-child(1) {
-        background-color: #e96969;
+        background-color: desaturate($red, 75%);
       }
       &:nth-child(2) {
-        background-color: #f2d76c;
+        background-color: desaturate($yellow, 75%);
       }
       &:nth-child(3) {
-        background-color: #65e979;
+        background-color: desaturate($green, 75%);
+      }
+      &.activeTab {
+        height: calc(100% + 0.8rem);
+        &:nth-child(1) {
+          background-color: desaturate($red, 0);
+        }
+        &:nth-child(2) {
+          background-color: desaturate($yellow, 0);
+        }
+        &:nth-child(3) {
+          background-color: desaturate($green, 0);
+        }
       }
     }
   }
@@ -57,18 +74,21 @@
 
 .pictureBooksWrap {
   width: 100%;
+  height: calc(100dvh - 16dvh - (100dvh / 9));
   max-width: 150%;
   overflow-x: auto;
-  height: calc(100dvh - 16dvh - 100dvh / 9);
   ul {
+    width: 100%;
+    height: 100%;
+    padding-left: 2dvw;
     display: flex;
-    justify-content: space-around;
-    align-items: end;
+    justify-content: start;
+    align-items: center;
     column-gap: 1.6rem;
     li {
       width: 12rem;
       height: 16rem;
-      background-image: url("../../../public/img/readingBook.svg");
+      background-image: url("/img/readingBook.svg");
       background-size: cover;
       background-position: center;
       display: flex;
@@ -79,6 +99,9 @@
         margin: 0.8rem 0;
       }
       img {
+        width: 8rem;
+        height: 8rem;
+        object-fit: cover;
         border: 1px solid $text;
       }
     }

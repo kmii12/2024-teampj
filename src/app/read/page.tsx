@@ -7,6 +7,7 @@ import close from "../../../public/img/close.svg";
 
 const Read: React.FC = () => {
   const [isLandscape, setIsLandscape] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<number>(1); // 1: 最初のタブ
 
   // 向きの変更を監視
   useEffect(() => {
@@ -15,17 +16,16 @@ const Read: React.FC = () => {
       setIsLandscape(orientation.type.includes("landscape"));
     };
 
-    // 初期向きを確認
     updateOrientation();
-
-    // イベントリスナーを追加
     window.addEventListener("orientationchange", updateOrientation);
-
-    // クリーンアップ
     return () => {
       window.removeEventListener("orientationchange", updateOrientation);
     };
   }, []);
+
+  const handleTabClick = (index: number) => {
+    setActiveTab(index);
+  };
 
   return (
     <div>
@@ -40,76 +40,69 @@ const Read: React.FC = () => {
           </div>
           <nav className={styles.tab}>
             <ul>
-              <li>ももいけいこ</li>
-              <li>ひかる</li>
-              <li>ひかりん</li>
+              {["ももいけいこ", "ひかる", "ひかりん"].map((tab, index) => (
+                <li
+                  key={index}
+                  className={`${
+                    activeTab === index + 1 ? styles.activeTab : ""
+                  }`}
+                  onClick={() => handleTabClick(index + 1)}
+                >
+                  {tab}
+                </li>
+              ))}
             </ul>
           </nav>
           <div className={styles.pictureBooksWrap}>
             <ul>
-              <li>
-                <p>シンデレラ</p>
-                <Image
-                  src="/img/cinderella.jpeg"
-                  alt="シンデレラの絵本の写真"
-                  width={80}
-                  height={80}
-                />
-              </li>
-              <li>
-                <p>シンデレラ</p>
-                <Image
-                  src="/img/cinderella.jpeg"
-                  alt="シンデレラの絵本の写真"
-                  width={80}
-                  height={80}
-                />
-              </li>
-              <li>
-                <p>シンデレラ</p>
-                <Image
-                  src="/img/cinderella.jpeg"
-                  alt="シンデレラの絵本の写真"
-                  width={80}
-                  height={80}
-                />
-              </li>
-              <li>
-                <p>シンデレラ</p>
-                <Image
-                  src="/img/cinderella.jpeg"
-                  alt="シンデレラの絵本の写真"
-                  width={80}
-                  height={80}
-                />
-              </li>
-              <li>
-                <p>シンデレラ</p>
-                <Image
-                  src="/img/cinderella.jpeg"
-                  alt="シンデレラの絵本の写真"
-                  width={80}
-                  height={80}
-                />
-              </li>
-              <li>
-                <p>シンデレラ</p>
-                <Image
-                  src="/img/cinderella.jpeg"
-                  alt="シンデレラの絵本の写真"
-                  width={80}
-                  height={80}
-                />
-              </li>
-              <li>
-                <p>シンデレラ</p>
-                <Image
-                  src="/img/cinderella.jpeg"
-                  alt="シンデレラの絵本の写真"
-                  width={80}
-                  height={80}
-                />
-              </li>
+              {activeTab === 1 && (
+                <>
+                  <li>
+                    <p>アラジン</p>
+                    <Image
+                      src="/img/aladdin.jpeg"
+                      alt="アラジンの絵本の写真"
+                      width={80}
+                      height={80}
+                    />
+                  </li>
+                  <li>
+                    <p>シンデレラ</p>
+                    <Image
+                      src="/img/cinderella.jpeg"
+                      alt="シンデレラの絵本の写真"
+                      width={80}
+                      height={80}
+                    />
+                  </li>
+                </>
+              )}
+              {activeTab === 2 && (
+                <>
+                  <li>
+                    <p>赤ずきん</p>
+                    <Image
+                      src="/img/littleRedRidingHood.jpeg"
+                      alt="赤ずきんの絵本の写真"
+                      width={80}
+                      height={80}
+                    />
+                  </li>
+                </>
+              )}
+              {activeTab === 3 && (
+                <>
+                  <li>
+                    <p>白雪姫</p>
+                    <Image
+                      src="/img/snowwhite.jpeg"
+                      alt="白雪姫の絵本の写真"
+                      width={80}
+                      height={80}
+                    />
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
