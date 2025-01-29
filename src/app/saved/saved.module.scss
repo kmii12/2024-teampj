@@ -19,12 +19,26 @@
 }
 
 .searchBarWrap {
-  margin: 130px 30px 0 30px;
+  padding: 47px 0px 10px 0px;
+  width: 94vw;
+  position: relative;
+  position: fixed;
+  z-index: 1000;
+  background-color: $base;
+  .sortIcon {
+    width: 16px;
+    height: 18px;
+    background-image: url(../../../public/img/saved_icon_sort.jpg);
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+  }
 }
 
 .resultContainer {
   color: $main;
-  // margin: 44px 20px 120px 20px; //resultPage全ての上下の余白
 
   .resultList {
     width: 360px;
@@ -39,6 +53,7 @@
       flex-wrap: wrap;
       gap: 30px;
       justify-content: left;
+      padding-top: 100px;
 
       .resultItem {
         //li

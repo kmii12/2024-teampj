@@ -75,6 +75,7 @@ export default function SavedList() {
       </div>
       <div className={styles.searchBarWrap}>
         <SearchBar />
+        <div className={styles.sortIcon}></div>
       </div>
       <main className={styles.resultContainer}>
         <ul className={styles.resultList}>
