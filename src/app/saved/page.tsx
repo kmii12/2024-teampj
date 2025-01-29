@@ -29,12 +29,12 @@ import Header from "@/app/components/Header";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-//firesbase
+//firesBase
 import { db } from "@/firebase";
 
 // console.log(db);
 
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 interface PictureBook {
   id: string;
@@ -67,6 +67,9 @@ export default function SavedList() {
     };
     fetchData();
   }, []);
+  if (!savedDatas) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -82,7 +85,7 @@ export default function SavedList() {
           <div className={styles.resultItemWrap}>
             {savedDatas.map((savedItem) => (
               <li key={savedItem.id} className={styles.resultItem}>
-                <Link href={`/result/resultDetail/${savedItem.id}`}>
+                <Link href={`/saved/${savedItem.id}`}>
                   <div className={styles.resultItemCard}>
                     <h3>{savedItem.title}</h3>
                     <div className={styles.itemImageWrap}>
