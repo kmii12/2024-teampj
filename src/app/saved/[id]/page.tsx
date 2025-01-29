@@ -2,16 +2,23 @@
 
 import Link from "next/link";
 // import styles from "./saved.module.scss";
-// import { usePathname } from "next/navigation";
 import SearchBar from "@/app/components/SearchBar";
 import Header from "@/app/components/Header";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
+
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 //firesBase
 import { db } from "@/firebase";
-import { doc, getDoc } from "firebase/firestore";
-
+import {
+  doc,
+  getDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 // import { useSearchParams } from "next/navigation";
 interface PictureBook {
   id: string;
@@ -25,38 +32,29 @@ interface PictureBook {
   atmosphere: string[];
 }
 
-// export default function detailPage({
-//   params,
-// }: {
-//   params: Promise<{ id: string }>;
-// }) {
-//   const searchParams = useSearchParams();
-//   const dataParams = searchParams.getAll("data");
-
-//   if (dataParams.length > 0) {
-//     const data = decodeURIComponent(dataParams[0]);
-//     const;
-//   }
-// }
-
-export default function detailPage({ params }: { params: { id: string } }) {
+export default function detailPage({ params }: { params: { id: number } }) {
   const { id } = params;
+  // const id = use(params.id);
+
   const [book, setBook] = useState<PictureBook | null>(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     console.log("Received ID:", id);
     if (!id) return;
 
     const fetchBook = async () => {
-      const docRef = doc(db, "picturebooks", id);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setBook({ id: docSnap.id, ...docSnap.data() } as PictureBook);
+      const booksRef = collection(db, "picturebooks");
+      const q = query(booksRef, where("id", "==", Number(id)));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((doc) => {
+          setBook({ id: doc.id, ...doc.data() } as PictureBook);
+        });
       } else {
-        console.log("No such document!");
+        console.log("フィールドない");
       }
-      setLoading(false);
     };
     fetchBook();
   }, [id]);
@@ -66,9 +64,74 @@ export default function detailPage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className={styles.mainContainer}>
+      <div>
         <h1>{book.title}</h1>
       </div>
     </>
   );
 }
+
+// "use client";
+
+// import { useEffect, useState } from "react";
+// import { useRouter } from "next/router";
+// import { db } from "@/firebase";
+// import {
+//   doc,
+//   getDoc,
+//   collection,
+//   query,
+//   where,
+//   getDocs,
+// } from "firebase/firestore";
+
+// interface PictureBook {
+//   id: string; // Firestore IDは文字列
+//   title: string;
+//   writer: string;
+//   image: string;
+//   mainCharacter: string;
+//   character: string[];
+//   genre: string;
+//   location: string;
+//   atmosphere: string[];
+// }
+
+// export default function DetailPage({ params }: { params: { id: string } }) {
+//   const { id } = params;
+//   const [book, setBook] = useState<PictureBook | null>(null);
+
+//   useEffect(() => {
+//     console.log("Received ID:", id);
+//     if (!id) return;
+
+//     const fetchBook = async () => {
+//       const booksRef = collection(db, "picturebooks");
+//       const q = query(booksRef, where("id", "==", id)); // IDを文字列として比較
+//       const querySnapshot = await getDocs(q);
+
+//       if (!querySnapshot.empty) {
+//         querySnapshot.forEach((doc) => {
+//           setBook({ id: doc.id, ...doc.data() } as PictureBook);
+//         });
+//       } else {
+//         console.log("No document found!");
+//       }
+//     };
+//     fetchBook();
+//   }, [id]);
+
+//   if (!book) {
+//     return <p>Loading...</p>;
+//   }
+
+//   return (
+//     <>
+//       <div>
+//         <h1>{book.title}</h1>
+//         <p>{book.writer}</p>
+//         <img src={book.image} alt={book.title} />
+//       </div>
+//     </>
+//   );
+// }

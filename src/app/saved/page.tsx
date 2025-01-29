@@ -51,6 +51,11 @@ interface PictureBook {
 export default function SavedList() {
   //firebaseの絵本データ
   const [savedDatas, setSavedDates] = useState<{ id: string }[]>([]);
+  const [newSavedData, setNewSavedData] = useState<{ id: string }[]>([]);
+
+  // モーダル
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [bookToDelete, setBookToDelete] = useState<PictureBook | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,9 +69,18 @@ export default function SavedList() {
       }));
       console.log("絵本データ:", data);
       setSavedDates(data);
+      setNewSavedData(data);
     };
     fetchData();
   }, []);
+
+  // 削除ボタンの処理
+  const handleDelete = (id: string) => {
+    // newSavedData から指定された id を持つアイテムを削除
+    const updatedData = newSavedData.filter((item) => item.id !== id);
+    setNewSavedData(updatedData); // 更新されたデータで状態を更新
+  };
+
   if (!savedDatas) {
     return <p>Loading...</p>;
   }
@@ -83,11 +97,11 @@ export default function SavedList() {
       <main className={styles.resultContainer}>
         <ul className={styles.resultList}>
           <div className={styles.resultItemWrap}>
-            {savedDatas.map((savedItem) => (
+            {newSavedData.map((savedItem) => (
               <li key={savedItem.id} className={styles.resultItem}>
-                <Link href={`/saved/${savedItem.id}`}>
-                  <div className={styles.resultItemCard}>
-                    <h3>{savedItem.title}</h3>
+                <div className={styles.resultItemCard}>
+                  <h3>{savedItem.title}</h3>
+                  <Link href={`/saved/${savedItem.id}`}>
                     <div className={styles.itemImageWrap}>
                       <div className={styles.imgWrap}>
                         <Image
@@ -99,8 +113,14 @@ export default function SavedList() {
                         />
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(savedItem.id)}
+                    className={styles.deleteBtn}
+                  >
+                    ×
+                  </button>
+                </div>
               </li>
             ))}
           </div>
