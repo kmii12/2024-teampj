@@ -6,9 +6,8 @@ interface SearchBarProps {
   // setSearchText: Dispatch<SetStateAction<string>>;
 }
 
-export default function SearchBar({
-  searchText,
-}: // setSearchText,
+export default function SearchBar({}: // searchText,
+// setSearchText,
 SearchBarProps) {
   // const [searchText, setSearchText] = useState("");
 
@@ -23,10 +22,10 @@ SearchBarProps) {
         size={25}
         className={styles.searchBar}
         placeholder="キーワードを入れてください"
-        value={searchText}
+        // value={searchText}
         // onChange={(e) => setSearchText(e.target.value)}
       />
-      {searchText && (
+      {/* {searchText && (
         <button onClick={clearBtn} className={styles.clearBtn}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +53,7 @@ SearchBarProps) {
             </g>
           </svg>
         </button>
-      )}
+      )} */}
     </div>
   );
 }
