@@ -3,17 +3,16 @@ import { Dispatch, SetStateAction } from "react";
 
 interface SearchBarProps {
   searchText: string;
-  setSearchText: Dispatch<SetStateAction<string>>;
+  // setSearchText: Dispatch<SetStateAction<string>>;
 }
 
-export default function SearchBar({
-  searchText,
-  setSearchText,
-}: SearchBarProps) {
+export default function SearchBar({}: // searchText,
+// setSearchText,
+SearchBarProps) {
   // const [searchText, setSearchText] = useState("");
 
   const clearBtn = () => {
-    setSearchText("");
+    // setSearchText("");
   };
 
   return (
@@ -23,10 +22,10 @@ export default function SearchBar({
         size={25}
         className={styles.searchBar}
         placeholder="キーワードを入れてください"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
+        // value={searchText}
+        // onChange={(e) => setSearchText(e.target.value)}
       />
-      {searchText && (
+      {/* {searchText && (
         <button onClick={clearBtn} className={styles.clearBtn}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +53,7 @@ export default function SearchBar({
             </g>
           </svg>
         </button>
-      )}
+      )} */}
     </div>
   );
 }
