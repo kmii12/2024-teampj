@@ -25,7 +25,6 @@ import Link from "next/link";
 import styles from "./saved.module.scss";
 // import { usePathname } from "next/navigation";
 import SearchBar from "@/app/components/SearchBar";
-import Header from "@/app/components/Header";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
@@ -39,18 +38,14 @@ import { collection, getDocs } from "firebase/firestore";
 interface PictureBook {
   id: string;
   title: string;
-  writer: string;
-  image: string;
-  mainCharacter: string;
-  character: string[];
-  genre: string;
-  location: string;
-  atmosphere: string[];
+  img: string;
 }
 
 export default function SavedList() {
   //firebaseの絵本データ
-  const [savedDatas, setSavedDates] = useState<{ id: string }[]>([]);
+  const [savedDatas, setSavedDates] = useState<
+    { id: string; title: string; img: string }[]
+  >([]);
   const [newSavedData, setNewSavedData] = useState<
     { id: string; title: string; img: string }[]
   >([]);
@@ -63,6 +58,8 @@ export default function SavedList() {
       //dataに配列として挿入
       const data = querySnapshot.docs.map((doc) => ({
         id: doc.id,
+        title: doc.title ?? "タイトルなし", // title がない場合デフォルト値を設定
+        img: doc.img ?? "/default.jpg", // img がない場合デフォルト画像を設定
         ...doc.data(),
       }));
       console.log("絵本データ:", data);
