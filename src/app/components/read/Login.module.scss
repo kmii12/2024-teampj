@@ -1,0 +1,89 @@
+@import "../../styles/variables.scss";
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalLogin {
+  width: 75%;
+  height: 80dvh;
+  background-color: $base;
+  border-radius: 2.4rem;
+  padding: 4dvh 4dvw;
+  .modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .modalCloseBtn {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 0.8rem;
+      background-color: $main;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    h2 {
+      width: 96%;
+      font-size: 2.4rem;
+      text-align: center;
+      color: $main;
+    }
+  }
+  .modalForm {
+    width: 100%;
+    height: 60dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    .formGroup {
+      width: 100%;
+      height: 48dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.6rem;
+      .password {
+        width: 50%;
+        font-size: 1.6rem;
+        padding: 1.6rem 2.4rem;
+        border-radius: 5rem;
+        background-color: #ede1db;
+        color: $main;
+        box-shadow: 2px 4px 0px 0px rgba(172, 141, 126, 0.5) inset;
+      }
+      .error {
+        color: $accent;
+        font-size: 1.2rem;
+      }
+      .children {
+        width: 50%;
+        font-size: 1.6rem;
+        color: $main;
+        padding: 0.8rem 1.6rem;
+        background-color: $white;
+        border: 1px solid #ede1db;
+        border-radius: 0.8rem;
+      }
+    }
+    button {
+      padding: 1.2rem 1.6rem;
+      border-radius: 1.6rem;
+      color: $white;
+      background-color: $accent;
+      font-size: 1.6rem;
+      font-weight: 500;
+    }
+  }
+}

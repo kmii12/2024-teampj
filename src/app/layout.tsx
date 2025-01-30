@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "ress";
 import "./globals.css";
-import Footer from "./components/Footer";
+import FooterHidden from "./components/FooterHidden";
 
 export const metadata: Metadata = {
   title: "えほんポケット",
@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="ja">
       <body>
         <main>{children}</main>
-        <Footer />
+        <FooterHidden />
       </body>
     </html>
   );
