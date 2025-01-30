@@ -1,16 +1,25 @@
 "use client";
 import { useEffect, useState } from "react";
-import Portrait from "../components/Portrait";
+import Portrait from "../components/read/Portrait";
 import styles from "./Read.module.scss";
 import Image from "next/image";
 import close from "../../../public/img/close.svg";
-import ReadLogin from "../components/ReadLogin";
 import Link from "next/link";
+import Tab from "../components/read/Tab";
+import Login from "../components/read/Login";
+
+interface PictureBook {
+  title: string;
+  img: string;
+  link?: string;
+}
 
 const Read: React.FC = () => {
   const [isLandscape, setIsLandscape] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<number>(1);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalLogin, setIsModalLogin] = useState<boolean>(false);
+  const [isUnlocked, setIsUnlocked] = useState<boolean>(false);
+  const [lockedTab, setLockedTab] = useState<number | null>(null);
 
   // 向きの変更を監視
   useEffect(() => {
@@ -26,12 +35,26 @@ const Read: React.FC = () => {
     };
   }, []);
 
-  const handleTabClick = (index: number) => {
-    setActiveTab(index);
+  const pictureBooks: { [key: number]: PictureBook[] } = {
+    1: [
+      { title: "アラジン", img: "/img/aladdin.jpg" },
+      { title: "かぐや姫", img: "/img/kaguyahime.jpg" },
+    ],
+    2: [{ title: "桃太郎", img: "/img/momotaro.jpeg" }],
+    3: [
+      {
+        title: "赤ずきん",
+        img: "/img/littleRedRidingHood.jpg",
+        link: "/read/reading",
+      },
+    ],
   };
 
-  const openReadLogin = () => setIsModalOpen(true);
-  const closeReadLogin = () => setIsModalOpen(false);
+  const handleLoginSuccess = (tabNumber: number) => {
+    setIsUnlocked(true);
+    setLockedTab(tabNumber);
+    setIsModalLogin(false);
+  };
 
   return (
     <div>
@@ -42,91 +65,52 @@ const Read: React.FC = () => {
             <button className={styles.closeBtn}>
               <Image src={close} alt="閉じる" />
             </button>
-            <button className={styles.lockBtn}>ロック解除中</button>
+            <button
+              className={styles.lockBtn}
+              onClick={() => setIsModalLogin(true)}
+            >
+              {isUnlocked ? "ロック中" : "ロック解除中"}
+            </button>
           </div>
-          <nav className={styles.tab}>
-            <ul>
-              {["ももこ", "ひかる", "れいか"].map((tab, index) => (
-                <li
-                  key={index}
-                  className={`${
-                    activeTab === index + 1 ? styles.activeTab : ""
-                  }`}
-                  onClick={() => handleTabClick(index + 1)}
-                >
-                  {tab}
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <Tab
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            isUnlocked={isUnlocked}
+            lockedTab={lockedTab}
+          />
           <div className={styles.pictureBooksWrap}>
             <ul>
-              {activeTab === 1 && (
-                <>
-                  <li>
-                    <p>アラジン</p>
-                    <Image
-                      src="/img/aladdin.jpg"
-                      alt="アラジンの絵本の写真"
-                      width={80}
-                      height={80}
-                    />
-                  </li>
-                  <li>
-                    <p>かぐや姫</p>
-                    <Image
-                      src="/img/kaguyahime.jpg"
-                      alt="かぐや姫の絵本の写真"
-                      width={80}
-                      height={80}
-                    />
-                  </li>
-                </>
-              )}
-              {activeTab === 2 && (
-                <>
-                  <li>
-                    <p>桃太郎</p>
-                    <Image
-                      src="/img/momotaro.jpeg"
-                      alt="桃太郎の絵本の写真"
-                      width={80}
-                      height={80}
-                    />
-                  </li>
-                </>
-              )}
-              {activeTab === 3 && (
-                <>
-                  <li>
-                    <Link href="/read/reading">
-                      <p>赤ずきん</p>
+              {pictureBooks[activeTab]?.map((book, index) => (
+                <li key={index}>
+                  <p>{book.title}</p>
+                  {book.link ? (
+                    <Link href={book.link}>
                       <Image
-                        src="/img/littleRedRidingHood.jpg"
-                        alt="赤ずきんの絵本の写真"
+                        src={book.img}
+                        alt={`${book.title}の絵本`}
                         width={80}
                         height={80}
                       />
                     </Link>
-                  </li>
-                </>
-              )}
+                  ) : (
+                    <Image
+                      src={book.img}
+                      alt={`${book.title}の絵本`}
+                      width={80}
+                      height={80}
+                    />
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
-          <ReadLogin isOpen={isModalOpen} onClose={closeReadLogin}>
-            <h2>ログイン</h2>
-            <form>
-              <label>
-                ユーザー名:
-                <input type="text" />
-              </label>
-              <label>
-                パスワード:
-                <input type="password" />
-              </label>
-              <button type="submit">ログイン</button>
-            </form>
-          </ReadLogin>
+          {isModalLogin && (
+            <Login
+              isUnlocked={isUnlocked} // 追加
+              setIsModalLogin={setIsModalLogin}
+              handleLoginSuccess={(tabNumber) => handleLoginSuccess(tabNumber)}
+            />
+          )}
         </div>
       ) : (
         // 画面縦向き

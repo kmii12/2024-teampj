@@ -1,7 +1,4 @@
 @import "../styles/variables.scss";
-$red: #e96969;
-$yellow: #f2d76c;
-$green: #65e979;
 
 .container {
   width: 100%;
@@ -25,50 +22,8 @@ $green: #65e979;
   }
   .lockBtn {
     font-size: 1.6rem;
-  }
-}
-
-.tab {
-  width: 100%;
-  height: calc(100dvh / 9);
-  ul {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: end;
-    li {
-      width: calc(100% / 6);
-      height: inherit;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1.6rem 1.6rem 0 0;
-      font-size: 1.6rem;
-      font-weight: 500;
-      color: $white;
-      transition: 0.3s;
-      &:nth-child(1) {
-        background-color: desaturate($red, 75%);
-      }
-      &:nth-child(2) {
-        background-color: desaturate($yellow, 75%);
-      }
-      &:nth-child(3) {
-        background-color: desaturate($green, 75%);
-      }
-      &.activeTab {
-        height: calc(100% + 0.8rem);
-        &:nth-child(1) {
-          background-color: desaturate($red, 0);
-        }
-        &:nth-child(2) {
-          background-color: desaturate($yellow, 0);
-        }
-        &:nth-child(3) {
-          background-color: desaturate($green, 0);
-        }
-      }
-    }
+    color: $main;
+    font-weight: 500;
   }
 }
 
