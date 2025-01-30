@@ -35,19 +35,19 @@ import { db } from "@/firebase";
 
 import { collection, getDocs } from "firebase/firestore";
 
-interface PictureBook {
-  id: string;
-  title: string;
-  img: string;
-}
+// interface PictureBook {
+//   id: string;
+//   title: string;
+//   img: string;
+// }
 
 export default function SavedList() {
   //firebaseの絵本データ
   const [savedDatas, setSavedDates] = useState<
-    { id: string; title: string; img: string }[]
+    { id: number; title: string; img: string }[]
   >([]);
   const [newSavedData, setNewSavedData] = useState<
-    { id: string; title: string; img: string }[]
+    { id: number; title: string; img: string }[]
   >([]);
 
   useEffect(() => {
@@ -56,12 +56,22 @@ export default function SavedList() {
       const querySnapshot = await getDocs(collection(db, "picturebooks"));
       // console.log(querySnapshot);
       //dataに配列として挿入
-      const data = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        title: doc.title ?? "タイトルなし", // title がない場合デフォルト値を設定
-        img: doc.img ?? "/default.jpg", // img がない場合デフォルト画像を設定
-        ...doc.data(),
-      }));
+      const data = querySnapshot.docs.map((doc) => {
+        const docData = doc.data() as {
+          id: number;
+          title: string;
+          img: string;
+        };
+        return {
+          id: docData.id ?? "",
+          title: docData.title ?? "タイトルなし", // title がない場合デフォルト値
+          img: docData.img ?? "/default.jpg",
+        };
+        // id: doc.id,
+        // title: doc.title ?? "タイトルなし",
+        // img: doc.img ?? "/default.jpg",
+        // ...doc.data(),
+      });
       console.log("絵本データ:", data);
       setSavedDates(data);
       setNewSavedData(data);
@@ -70,7 +80,7 @@ export default function SavedList() {
   }, []);
 
   // 削除ボタンの処理
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number) => {
     // newSavedData から指定された id を持つアイテムを削除
     const updatedData = newSavedData.filter((item) => item.id !== id);
     setNewSavedData(updatedData); // 更新されたデータで状態を更新

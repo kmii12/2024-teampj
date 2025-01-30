@@ -1,4 +1,4 @@
-@import "../../../../styles/variables.scss";
+@use "../../../../styles/variables.scss" as *;
 
 .detailContainer {
   margin: 8dvh 6dvw 0;

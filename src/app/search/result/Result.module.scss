@@ -1,5 +1,4 @@
-@import "../../styles/variables.scss";
-
+@use "../../styles/variables.scss" as *;
 .resultContainer {
   color: $main;
   margin: 0 0 16dvh; //resultPage全ての上下の余白

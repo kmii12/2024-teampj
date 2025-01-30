@@ -1,8 +1,8 @@
 import styles from "./SearchBar.module.scss";
-import { Dispatch, SetStateAction } from "react";
+// import { Dispatch, SetStateAction } from "react";
 
 interface SearchBarProps {
-  searchText: string;
+  searchText?: string;
   // setSearchText: Dispatch<SetStateAction<string>>;
 }
 
@@ -11,9 +11,9 @@ export default function SearchBar({}: // searchText,
 SearchBarProps) {
   // const [searchText, setSearchText] = useState("");
 
-  const clearBtn = () => {
-    // setSearchText("");
-  };
+  // const clearBtn = () => {
+  //   // setSearchText("");
+  // };
 
   return (
     <div className={styles.searchBarWrap}>
