@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-// import styles from "./saved.module.scss";
+import styles from "./detail.module.scss";
 import { use, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import { GetServerSideProps } from "next";
 
 //firesBase
 import { db } from "@/firebase";
@@ -20,28 +21,22 @@ import {
 interface PictureBook {
   id: string;
   title: string;
+  summary: string;
   writer: string;
-  image: string;
+  img: string;
   mainCharacter: string;
   character: string[];
+  category: string[];
   genre: string;
   location: string;
-  atmosphere: string[];
 }
 
-// { params }: { params: { id: number } }
-
 export default function detailPage() {
-  // const { id } = params;
-  // // const id = use(params.id);
-  const params = useParams(); // useParams でパラメータを取得
-  const id = params?.id as string; // id を文字列として取得
-
+  const params = useParams();
+  const id = params?.id as string;
   const [book, setBook] = useState<PictureBook | null>(null);
-  // const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    console.log("Received ID:", id);
+    console.log("取得したID:", id);
     if (!id) return;
 
     const fetchBook = async () => {
@@ -65,8 +60,36 @@ export default function detailPage() {
 
   return (
     <>
-      <div>
-        <h1>{book.title}</h1>
+      <header className={styles.header}>
+        <button
+          className={styles.backBtn}
+          onClick={() => window.history.back()}
+        >
+          戻る
+        </button>
+      </header>
+      <div className={styles.bookContainer}>
+        <div className={styles.imgBox}>
+          <Image
+            src={book.img}
+            alt={book.title}
+            width={140}
+            height={140}
+            className={styles.img}
+          />
+        </div>
+        <div className={styles.txtFlexBox}>
+          <h1 className={styles.bookTtl}>{book.title}</h1>
+          <div className={styles.txtBottomBox}>
+            <p>作者：{book.writer}</p>
+            <p>ジャンル：{book.genre}</p>
+            <p>主人公：{book.mainCharacter}</p>
+          </div>
+        </div>
+      </div>
+      <div className={styles.summaryContainer}>
+        <h2>あらすじ</h2>
+        <p className={styles.summaryTxt}>{book.summary}</p>
       </div>
     </>
   );
