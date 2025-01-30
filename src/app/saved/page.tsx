@@ -51,11 +51,9 @@ interface PictureBook {
 export default function SavedList() {
   //firebaseの絵本データ
   const [savedDatas, setSavedDates] = useState<{ id: string }[]>([]);
-  const [newSavedData, setNewSavedData] = useState<{ id: string }[]>([]);
-
-  // モーダル
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [bookToDelete, setBookToDelete] = useState<PictureBook | null>(null);
+  const [newSavedData, setNewSavedData] = useState<
+    { id: string; title: string; img: string }[]
+  >([]);
 
   useEffect(() => {
     const fetchData = async () => {

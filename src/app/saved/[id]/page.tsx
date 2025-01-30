@@ -2,11 +2,8 @@
 
 import Link from "next/link";
 // import styles from "./saved.module.scss";
-import SearchBar from "@/app/components/SearchBar";
-import Header from "@/app/components/Header";
 import { use, useEffect, useState } from "react";
-
-import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
 import Image from "next/image";
 
 //firesBase
@@ -32,9 +29,13 @@ interface PictureBook {
   atmosphere: string[];
 }
 
-export default function detailPage({ params }: { params: { id: number } }) {
-  const { id } = params;
-  // const id = use(params.id);
+// { params }: { params: { id: number } }
+
+export default function detailPage() {
+  // const { id } = params;
+  // // const id = use(params.id);
+  const params = useParams(); // useParams でパラメータを取得
+  const id = params?.id as string; // id を文字列として取得
 
   const [book, setBook] = useState<PictureBook | null>(null);
   // const [loading, setLoading] = useState(true);
